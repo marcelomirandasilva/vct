@@ -1,0 +1,97 @@
+
+// Fonts
+// @import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
+
+// Variables
+@import "variables";
+
+// Bootstrap
+$icon-font-path: '/fonts/bootstrap/';
+@import "vendor/twbs/bootstrap-sass/assets/stylesheets/_bootstrap";
+// @import "bootstrap";
+
+// font-awesome
+@import '~gentelella/vendors/font-awesome/scss/font-awesome';
+
+// Animate CSS
+@import '~gentelella/vendors/animate.css/animate';
+
+// PNotify 
+@import '~gentelella/vendors/pnotify/dist/pnotify.css';
+// @import '~gentelella/vendors/pnotify/dist/pnotify.buttons.css';
+
+// Gentelella
+@import '~gentelella/src/scss/custom';
+
+// alterações no gentelella
+@import 'alt_gentelella.scss';
+
+// https://lokesh-coder.github.io/pretty-checkbox/
+//@import '../css/pretty-checkbox.min.css';
+	 
+
+// .navbar-laravel {
+//   background-color: #fff;
+//   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+// }
+
+.logo_topo {
+		width: 315px;
+		margin-top: 20px;
+		border: 4px solid #BFA15F;
+		border-radius: 15px;
+		border-bottom-left-radius: 0px;
+}
+
+
+.cor_fundo {
+	background: $cor_background_padrao !important;
+}
+.cor_texto_roxo {
+	color: #342a54 !important;
+}
+
+
+.fas-tabela {
+	font-size: 12px !important;
+	padding: 2px !important;
+}
+
+.fonte_dourada {
+	color: #BFA15F;
+}
+
+
+.combustiveis {
+	padding-right: 4px !important;
+	padding-left: 	4px !important;
+	text-align: right;
+}
+
+.tabela_abastecimentos {
+	width: 100% !important;
+}
+
+.count_top .fas {
+	font-size: 15px !important;
+	padding-right: 0px !important;
+}
+
+.embreve {
+	color: $cor_texto_padrao;
+	font-size: 60px;
+	text-align: center;
+	margin-top: 60px;
+	margin-bottom: 60px;
+}
+
+.botao_acao {
+	margin-right: 1px;
+}
+
+.input_data {
+	padding-left: 2px;
+	padding-right: 1px;
+}
+
+    
