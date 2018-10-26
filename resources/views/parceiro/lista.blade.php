@@ -48,7 +48,15 @@
                               title="Edita essa parceiro">  
                               <i class="glyphicon glyphicon-pencil "></i>
                            </a>
-                              
+                           <a href="{{ url("parceiro/$parceiro->id") }}" 
+                              id="btn_exclui_parceiro"
+                              class="btn btn-danger btn-xs  action botao_acao  "  
+                              data-toggle="tooltip" 
+                              data-parceiro = {{ $parceiro->id }}
+                              data-placement="bottom" 
+                              title="Exclui esse parceiro"> 
+                              <i class="glyphicon glyphicon-remove "></i>
+                           </a>
                            
                         </td>
                      </tr>
@@ -86,7 +94,56 @@
 				stateDuration: -1,
 				responsive : true,
             		  		
-			});
+         });
+         
+
+         //botão de exclusão
+			$("table#tb_parceiros").on("click", "#btn_exclui_parceiro",function(){
+				event.preventDefault();
+				
+
+				let id_parceiro = $(this).data('parceiro');
+				let btn = $(this);
+
+				swal({
+					title: 'Confirma a EXCLUSÃO deste Parceiro?',
+					type: 'question',
+					showCancelButton: true,
+					confirmButtonColor: '#3085d6',
+					cancelButtonColor: '#d33',
+					confirmButtonText: 'Sim',
+					cancelButtonText: 'Não'
+				}).then((result) => {
+					if (result.value) {
+						$.post("{{ url('parceiro/') }}/"+id_parceiro, {
+							_token  : "{{ csrf_token() }}",
+							_method : 'DELETE',
+							id: 			id_parceiro,
+							},function(data){
+								if(data =="ok"){
+
+									//exclui a linha no datatables
+									$("table#tb_parceiros").DataTable().row( btn.parents('tr') ).remove().draw();
+									
+									swal(
+										'Parceiro EXCLUÍDO',
+										' ',
+										'success'
+									)
+								}
+			
+							})         
+						
+					} else {
+						swal(
+							'Exclusão Cancelada',
+							' ',
+							'error'
+						)
+					}
+				});
+         });
+         
 		});
 	</script>
 

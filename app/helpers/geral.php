@@ -24,6 +24,18 @@ if (! function_exists('retiraMascaraCPF')) {
    }
 }
 
+if (! function_exists('retiraMascaraTelefone')) {
+   function retiraMascaraTelefone($telefone) {
+      $telefone = trim($telefone);
+      $telefone = str_replace("(", "", $telefone);
+      $telefone = str_replace(")", "", $telefone);
+      $telefone = str_replace("-", "", $telefone);
+      $telefone = str_replace(" ", "", $telefone);
+      return $telefone;
+   }
+}
+
+
 if (! function_exists('formataPlaca')) {
    function formataPlaca($placa){
       $tam	= strlen($placa);

@@ -2,5 +2,6 @@
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
     "/css/pdf.css": "/css/pdf.css",
+    "/js/endereco.js": "/js/endereco.js",
     "/js/components.js": "/js/components.js"
 }

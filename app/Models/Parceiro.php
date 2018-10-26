@@ -13,15 +13,33 @@ class Parceiro extends Model implements AuditableContract
 
 
     protected $dates = ['deleted_at'];
-   protected $table = "parceiros";
+    protected $table = "parceiros";
 
     protected $fillable =[
-        'razao_social',
-        'cnpj',
-        'numero_contato',
-        'nome_contato',
-        'endereco',
-    ];
+        'nome',
+        'telefone1',
+        'telefone2',
+        'telefone3',
+        'email',
+        
+        'tipo_cadastro',
+        'cadastro',
+        'site',
+        'facebook',
+        'instagram',
+        'banco',
+        'conta',
+        'agencia',
+        
+        'pais',
+        'uf',
+        'municipio',
+        'bairro',
+        'logradouro',
+        'complemento',
+        'cep',
+
+];
 
     public function veiculos()
     {

@@ -28,121 +28,116 @@ class ParceiroController extends Controller
 
 	public function create()
 	{
-		$pais = 'BRASIL';
-		return view('parceiro.create',compact('pais'));
+		$pais 				= 'BRASIL';
+		$tipos_cadastro   = pegaValorEnum('parceiros', 'tipo_cadastro');
+		$bancos   			= pegaValorEnum('parceiros', 'banco');
+
+		return view('parceiro.create',compact('pais','tipos_cadastro','bancos'));
 		
 	}
 
 	public function store(Request $request)
 	{
-		//teste de segurança
-		$usuario_logado  = Auth::user();
+		$request->merge(['telefone1' => retiraMascaraTelefone($request->telefone1)]);
+		$request->merge(['telefone2' => retiraMascaraTelefone($request->telefone2)]);
+		$request->merge(['telefone3' => retiraMascaraTelefone($request->telefone3)]);
+
+		$request->merge(['cadastro' => retiraMascaraCPF($request->cadastro)]);
+
+		$this->validate($request,[
+			'nome'      => 'required|min:5|max:100',
+		]);
 		
-		if ( $usuario_logado->can('create_all_bases') ){
-			//inicia sessão de banco
-			DB::beginTransaction();
+		//dd($request->all());
 
-			$this->validate($request,[
-				'nome'      => 'required|min:5|max:50',
-				'endereco'  => 'required|min:7|max:200',
-			]);
+		//inicia sessão de banco
+		DB::beginTransaction();
+		
+			
+		// Criar um nova BAse
+		$novoParceiro = Parceiro::create($request->all());
 
-			// Criar um nova BAse
-			$novaBase = Base::create($request->all());
+		if($novoParceiro){
+			DB::commit();
+			return redirect('parceiro')->with('sucesso', 'Parceiro criado com sucesso!');
+		} else {
+			//Fail, desfaz as alterações no banco de dados
+			DB::rollBack();
+			return back()->withInput()->with('error', 'Falha ao criar o Parceiro.');    
+		}
 
-			if($novaBase){
-				DB::commit();
-				return redirect('base')->with('sucesso', 'Base criada com sucesso!');
-			} else {
-				//Fail, desfaz as alterações no banco de dados
-				DB::rollBack();
-				return back()->withInput()->with('error', 'Falha ao criar a Base.');    
-			}
-
-		}else{
-			return back()->with('erro_seguranca', 'Esse usuário não tem permissão para acessar esse módulo.');    
-		};
-
+	
 	}
 
 
-	public function show(Base $base)
+	public function show(Parceiro $parceiro)
 	{
 		//
 	}
 
-	public function edit(Base $base)
+	public function edit(Parceiro $parceiro)
 	{
-		//teste de segurança
-		$usuario_logado  = Auth::user();
-		
-		if ( $usuario_logado->can('update_all_bases') ){
-			return view('base.create', compact('base'));
-		}else{
-			return back()->with('erro_seguranca', 'Esse usuário não tem permissão para acessar esse módulo.');    
-		};
+		//dd($parceiro);
+		$pais 				= 'BRASIL';
+		$tipos_cadastro   = pegaValorEnum('parceiros', 'tipo_cadastro');
+		$bancos   			= pegaValorEnum('parceiros', 'banco');
+
+		return view('parceiro.create',compact('parceiro','pais','tipos_cadastro','bancos'));
 	}
 
 
-	public function update(Request $request, Base $base)
+	public function update(Request $request, Parceiro $parceiro)
 	{
-		//teste de segurança
-		$usuario_logado  = Auth::user();
+		$request->merge(['telefone1' => retiraMascaraTelefone($request->telefone1)]);
+		$request->merge(['telefone2' => retiraMascaraTelefone($request->telefone2)]);
+		$request->merge(['telefone3' => retiraMascaraTelefone($request->telefone3)]);
+
+		$request->merge(['cadastro' => retiraMascaraCPF($request->cadastro)]);
+
+		$this->validate($request,[
+			'nome'      => 'required|min:5|max:100',
+		]);
 		
-		if ( $usuario_logado->can('update_all_bases') ){
+		//dd($request->all());
 
-			//inicia sessão de banco
-			DB::beginTransaction();
-
-			$this->validate($request,[
-				'nome'      => 'required|min:5|max:50',
-				'endereco'  => 'required|min:7|max:200',
-			]);
-				
+		//inicia sessão de banco
+		DB::beginTransaction();
+		
 			
-			// altera os dados do base
-			$base->fill($request->all());
-			$salvou_base = $base->save();
+		// Criar um nova BAse
+		$parceiro->fill($request->all());
 
-			if($salvou_base){
-				DB::commit();
-				return redirect('base')->with('sucesso', 'Base alterada com sucesso!');
-			} else {
-				//Fail, desfaz as alterações no banco de dados
-				DB::rollBack();
-				return back()->withInput()->with('error', 'Falha ao alterar a Base.');    
-			}
+		$salvou = $parceiro->save();
 
-		}else{
-			return back()->with('erro_seguranca', 'Esse usuário não tem permissão para acessar esse módulo.');    
-		};
+		if($salvou){
+			DB::commit();
+			return redirect('parceiro')->with('sucesso', 'Parceiro alterado com sucesso!');
+		} else {
+			//Fail, desfaz as alterações no banco de dados
+			DB::rollBack();
+			return back()->withInput()->with('error', 'Falha ao alterar o Parceiro.');    
+		}
+
+			
 	}
 
 	public function destroy($id)
 	{
-		//teste de segurança
-		$usuario_logado  = Auth::user();
-		
-		if ( $usuario_logado->can('delete_all_bases') ){
 
-			//inicia sessão de banco
-			DB::beginTransaction();
-			//deleta
-			
-			$apagou_base = Base::find($id)->delete();
-			if($apagou_base){
-				DB::commit();
-				return response('ok', 200);
-			} else {
-				//Fail, desfaz as alterações no banco de dados
-				DB::rollBack();
-				return response('erro', 500);
-			}
-
-		}else{
-			return back()->with('erro_seguranca', 'Esse usuário não tem permissão para acessar esse módulo.');    
-		};
+		//inicia sessão de banco
+		DB::beginTransaction();
+		//deleta
 		
+		$apagou_Parceiro = Parceiro::find($id)->delete();
+		
+		if($apagou_Parceiro){
+			DB::commit();
+			return response('ok', 200);
+		} else {
+			//Fail, desfaz as alterações no banco de dados
+			DB::rollBack();
+			return response('erro', 500);
+		}
 
 		
 	}

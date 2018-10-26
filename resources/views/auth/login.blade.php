@@ -3,12 +3,12 @@
 	@section('htmlheader_title', 'Login')
 	@include('gentelella.layouts.partials.htmlheader')
 
-	<body class="login cor_fundo">
+	<body class="login cor_fundo_login">
 
 		<div id="app"> 
 			<a class="hiddenanchor" id="signup"></a>
 			<a class="hiddenanchor" id="signin"></a>
-			<div class="cor_fundo" style="width:100%; height:150px; text-align: center;">
+			<div class="cor_fundo_login" style="width:100%; height:150px; text-align: center;">
 				<img class="logo_topo" src="{{ asset("img/logo.png") }}" style="width:19%">
 			</div>
 

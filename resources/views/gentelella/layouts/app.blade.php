@@ -11,7 +11,7 @@
 						<div class="navbar nav_title" style="border: 0;">
 							<a href="{{ route('home')}}" class="site_title">
 								<img class="" src="{{ asset("img/globo.png") }}" style="width:19%">
-								<span>   VCT</span>
+								<span>Vendas</span>
 								<span style="font-size: 10px">V1.1</span>
 							</a>
 						</div>
