@@ -104,7 +104,7 @@
 
 					<div class="item form-group">
 						<i class="control-label col-md-1 col-sm-1 col-xs-12 fab fa-chrome" style="font-size: 18pt"> </i>
-						<div class="col-md-7 col-sm-7 col-xs-12">
+						<div class="col-md-10 col-sm-10 col-xs-12">
 							<input id="site" name="site" type="url" class="form-control input-md"
 									value="{{$parceiro->site or old('site')}}" >
 						</div>
@@ -112,7 +112,7 @@
 
 					<div class="item form-group">
 						<i class="control-label col-md-1 col-sm-1 col-xs-12 fab fa-facebook" style="font-size: 18pt"> </i>
-						<div class="col-md-7 col-sm-7 col-xs-12">
+						<div class="col-md-10 col-sm-10 col-xs-12">
 							<input id="facebook" name="facebook" type="url" class="form-control input-md"
 									value="{{$parceiro->facebook or old('facebook')}}" >
 						</div>
@@ -120,7 +120,7 @@
 
 					<div class="item form-group">
 							<i class="control-label col-md-1 col-sm-1 col-xs-12 fab fa-instagram" style="font-size: 18pt"> </i>
-							<div class="col-md-7 col-sm-7 col-xs-12">
+							<div class="col-md-10 col-sm-10 col-xs-12">
 								<input id="instagram" name="instagram" type="url" class="form-control input-md"
 										value="{{$parceiro->instagram or old('instagram')}}" >
 							</div>

@@ -19648,6 +19648,11 @@ body {
   text-align: center;
 }
 
+label {
+  padding-right: 0px  !important;
+  padding-left: 0px  !important;
+}
+
 .logo_topo {
   width: 315px;
   margin-top: 20px;

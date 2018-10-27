@@ -19,7 +19,7 @@ mix.js('resources/assets/js/app.js',        'public/js')
    
 mix.copyDirectory('vendor/twbs/bootstrap-sass/assets/fonts/bootstrap', 'public/fonts/bootstrap');
 
-mix.copyDirectory('resources/assets/vendor/bootstrap-datetimepicker', 'public/bootstrap-datetimepicker');
+//mix.copyDirectory('resources/assets/vendor/bootstrap-datetimepicker', 'public/bootstrap-datetimepicker');
 
 //mix.copyDirectory('node_modules/inputmask', 'public/inputmask');
 
