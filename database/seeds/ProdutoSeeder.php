@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class ParceiroSeeder extends Seeder
+class ProdutoSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +11,6 @@ class ParceiroSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Models\Parceiro::class, 100)->create();
+        factory(App\Models\Produto::class, 100)->create();
     }
 }

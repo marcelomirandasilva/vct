@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Produto;
 use App\Models\Parceiro;
-use App\Models\Banco;
 use App\Models\User;
 
 use Illuminate\Support\Facades\Auth;
@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 use Faker\Generator as Faker;
 
 
-class ParceiroController extends Controller
+class ProdutoController extends Controller
 {
 	public function __construct()
 	{
@@ -22,18 +22,17 @@ class ParceiroController extends Controller
 
 	public function index()
 	{
-		$parceiros = Parceiro::orderBy('nome')->get();  
-		return view('parceiro.lista',compact('parceiros'));
+		$produtos = Produto::orderBy('nome')->get();  
+		return view('produto.lista',compact('produtos'));
 
 	}
 
 	public function create()
 	{
-		$pais 				= 'BRASIL';
-		$tipos_cadastro   = pegaValorEnum('parceiros', 'tipo_cadastro');
-		$bancos   			= Banco::orderBy('nome')->get();
 
-		return view('parceiro.create',compact('pais','tipos_cadastro','bancos'));
+		$parceiros   			= Parceiro::orderBy('nome')->get();
+
+		return view('produto.create',compact('parceiros'));
 		
 	}
 
@@ -56,39 +55,40 @@ class ParceiroController extends Controller
 		
 			
 		// Criar um nova BAse
-		$novoParceiro = Parceiro::create($request->all());
+		$novoProduto = Produto::create($request->all());
 
-		if($novoParceiro){
+		if($novoProduto){
 			DB::commit();
-			return redirect('parceiro')->with('sucesso', 'Parceiro criado com sucesso!');
+			return redirect('produto')->with('sucesso', 'Produto criado com sucesso!');
 		} else {
 			//Fail, desfaz as alterações no banco de dados
 			DB::rollBack();
-			return back()->withInput()->with('error', 'Falha ao criar o Parceiro.');    
+			return back()->withInput()->with('error', 'Falha ao criar o Produto.');    
 		}
 
 	
 	}
 
 
-	public function show(Parceiro $parceiro)
+	public function show(Produto $produto)
 	{
 		//
 	}
 
-	public function edit(Parceiro $parceiro)
-	{
-		//dd($parceiro);
-		$pais 				= 'BRASIL';
-		$tipos_cadastro   = pegaValorEnum('parceiros', 'tipo_cadastro');
-		$bancos   			= Banco::orderBy('nome')->get();
 
-		return view('parceiro.create',compact('parceiro','pais','tipos_cadastro','bancos'));
+	public function edit(Produto $produto)
+	{
+
+		
+		$parceiros   			= Parceiro::orderBy('nome')->get();
+		
+		return view('produto.create',compact('produto','parceiros'));
 	}
-
-
-	public function update(Request $request, Parceiro $parceiro)
+	
+	
+	public function update(Request $request, Produto $produto)
 	{
+		//dd($request->all());
 		$request->merge(['telefone1' => retiraMascaraTelefone($request->telefone1)]);
 		$request->merge(['telefone2' => retiraMascaraTelefone($request->telefone2)]);
 		$request->merge(['telefone3' => retiraMascaraTelefone($request->telefone3)]);
@@ -106,17 +106,17 @@ class ParceiroController extends Controller
 		
 			
 		// Criar um nova BAse
-		$parceiro->fill($request->all());
+		$produto->fill($request->all());
 
-		$salvou = $parceiro->save();
+		$salvou = $produto->save();
 
 		if($salvou){
 			DB::commit();
-			return redirect('parceiro')->with('sucesso', 'Parceiro alterado com sucesso!');
+			return redirect('produto')->with('sucesso', 'Produto alterado com sucesso!');
 		} else {
 			//Fail, desfaz as alterações no banco de dados
 			DB::rollBack();
-			return back()->withInput()->with('error', 'Falha ao alterar o Parceiro.');    
+			return back()->withInput()->with('error', 'Falha ao alterar o Produto.');    
 		}
 
 			
@@ -129,9 +129,9 @@ class ParceiroController extends Controller
 		DB::beginTransaction();
 		//deleta
 		
-		$apagou_Parceiro = Parceiro::find($id)->delete();
+		$apagou_Produto = Produto::find($id)->delete();
 		
-		if($apagou_Parceiro){
+		if($apagou_Produto){
 			DB::commit();
 			return response('ok', 200);
 		} else {

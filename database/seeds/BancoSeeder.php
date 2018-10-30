@@ -1,0 +1,190 @@
+<?php
+
+use Illuminate\Database\Seeder;
+use App\Models\Banco;
+
+class BancoSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        
+        DB::table('bancos')->insert(['nome' => 'A.J.RENNER S.A.', 'codigo' => '654' ]);
+        DB::table('bancos')->insert(['nome' => 'ABC BRASIL S.A.', 'codigo' => '246' ]);
+        DB::table('bancos')->insert(['nome' => 'ALFA S.A.', 'codigo' => '25' ]);
+        DB::table('bancos')->insert(['nome' => 'ALVORADA S.A.', 'codigo' => '641' ]);
+        DB::table('bancos')->insert(['nome' => 'ARBI S.A.', 'codigo' => '213' ]);
+        DB::table('bancos')->insert(['nome' => 'AZTECA DO BRASIL S.A.', 'codigo' => '19' ]);
+        DB::table('bancos')->insert(['nome' => 'BANERJ S.A.', 'codigo' => '29' ]);
+        DB::table('bancos')->insert(['nome' => 'BANESTES S.A. DO ESTADO DO ESPÍRITO SANTO', 'codigo' => '21' ]);
+        DB::table('bancos')->insert(['nome' => 'BANIF-INTERNACIONAL DO FUNCHAL (BRASIL)S.A.', 'codigo' => '719' ]);
+        DB::table('bancos')->insert(['nome' => 'BANK OF AMERICA MERRILL LYNCH MÚLTIPLO S.A.', 'codigo' => '755' ]);
+        DB::table('bancos')->insert(['nome' => 'BANKBOSTON N.A.', 'codigo' => '744' ]);
+        DB::table('bancos')->insert(['nome' => 'BANKPAR S.A.', 'codigo' => '0' ]);
+        DB::table('bancos')->insert(['nome' => 'BARCLAYS S.A.', 'codigo' => '740' ]);
+        DB::table('bancos')->insert(['nome' => 'BB POPULAR DO BRASIL S.A.', 'codigo' => '73' ]);
+        DB::table('bancos')->insert(['nome' => 'BBM S.A.', 'codigo' => '107' ]);
+        DB::table('bancos')->insert(['nome' => 'BEG S.A.', 'codigo' => '31' ]);
+        DB::table('bancos')->insert(['nome' => 'BES INVESTIMENTO DO BRASIL S.A.-DE INVESTIMENTO', 'codigo' => '78' ]);
+        DB::table('bancos')->insert(['nome' => 'BGN S.A.', 'codigo' => '739' ]);
+        DB::table('bancos')->insert(['nome' => 'BM&F DE SERVIÇOS DE LIQUIDAÇÃO E CUSTÓDIA S.A', 'codigo' => '96' ]);
+        DB::table('bancos')->insert(['nome' => 'BMG S.A.', 'codigo' => '318' ]);
+        DB::table('bancos')->insert(['nome' => 'BNP PARIBAS BRASIL S.A.', 'codigo' => '752' ]);
+        DB::table('bancos')->insert(['nome' => 'BOAVISTA INTERATLÂNTICO S.A.', 'codigo' => '248' ]);
+        DB::table('bancos')->insert(['nome' => 'BONSUCESSO S.A.', 'codigo' => '218' ]);
+        DB::table('bancos')->insert(['nome' => 'BPN BRASIL MÚLTIPLO S.A.', 'codigo' => '69' ]);
+        DB::table('bancos')->insert(['nome' => 'BRACCE S.A.', 'codigo' => '65' ]);
+        DB::table('bancos')->insert(['nome' => 'BRADESCO BBI S.A.', 'codigo' => '36' ]);
+        DB::table('bancos')->insert(['nome' => 'BRADESCO CARTÕES S.A.', 'codigo' => '204' ]);
+        DB::table('bancos')->insert(['nome' => 'BRADESCO FINANCIAMENTOS S.A.', 'codigo' => '394' ]);
+        DB::table('bancos')->insert(['nome' => 'BRADESCO S.A.', 'codigo' => '237' ]);
+        DB::table('bancos')->insert(['nome' => 'BRASCAN S.A.', 'codigo' => '225' ]);
+        DB::table('bancos')->insert(['nome' => 'BRB - DE BRASÍLIA S.A.', 'codigo' => '70' ]);
+        DB::table('bancos')->insert(['nome' => 'BRICKELL S.A. CRÉDITO FINANCIAMENTO E INVESTIMENTO', 'codigo' => '092-2' ]);
+        DB::table('bancos')->insert(['nome' => 'BRJ S.A.', 'codigo' => 'M15' ]);
+        DB::table('bancos')->insert(['nome' => 'BTG PACTUAL S.A.', 'codigo' => '208' ]);
+        DB::table('bancos')->insert(['nome' => 'BVA S.A.', 'codigo' => '44' ]);
+        DB::table('bancos')->insert(['nome' => 'CACIQUE S.A.', 'codigo' => '263' ]);
+        DB::table('bancos')->insert(['nome' => 'CAIXA ECONÔMICA FEDERAL', 'codigo' => '104' ]);
+        DB::table('bancos')->insert(['nome' => 'CAIXA GERAL - BRASIL S.A.', 'codigo' => '473' ]);
+        DB::table('bancos')->insert(['nome' => 'CAPITAL S.A.', 'codigo' => '412' ]);
+        DB::table('bancos')->insert(['nome' => 'CARGILL S.A.', 'codigo' => '40' ]);
+        DB::table('bancos')->insert(['nome' => 'CÉDULA S.A.', 'codigo' => '266' ]);
+        DB::table('bancos')->insert(['nome' => 'CITIBANK N.A.', 'codigo' => '477' ]);
+        DB::table('bancos')->insert(['nome' => 'CITIBANK S.A.', 'codigo' => '745' ]);
+        DB::table('bancos')->insert(['nome' => 'CITICARD S.A.', 'codigo' => 'M08' ]);
+        DB::table('bancos')->insert(['nome' => 'CLÁSSICO S.A.', 'codigo' => '241' ]);
+        DB::table('bancos')->insert(['nome' => 'CNH CAPITAL S.A.', 'codigo' => 'M19' ]);
+        DB::table('bancos')->insert(['nome' => 'COMERCIAL E DE INVESTIMENTO SUDAMERIS S.A.', 'codigo' => '215' ]);
+        DB::table('bancos')->insert(['nome' => 'CONCÓRDIA S.A.', 'codigo' => '081-7' ]);
+        DB::table('bancos')->insert(['nome' => 'COOPERATIVA CENTRAL DE CRÉDITO NOROESTE BRASILEIRO LTDA.', 'codigo' => '097-3' ]);
+        DB::table('bancos')->insert(['nome' => 'COOPERATIVA CENTRAL DE CRÉDITO URBANO-CECRED', 'codigo' => '085-x' ]);
+        DB::table('bancos')->insert(['nome' => 'COOPERATIVA CENTRAL DE ECONOMIA E CRÉDITO MUTUO DAS UNICREDS', 'codigo' => '090-2' ]);
+        DB::table('bancos')->insert(['nome' => 'COOPERATIVA CENTRAL DE ECONOMIA E CREDITO MUTUO DAS UNICREDS', 'codigo' => '099-x' ]);
+        DB::table('bancos')->insert(['nome' => 'COOPERATIVA DE CRÉDITO RURAL DA REGIÃO DE MOGIANA', 'codigo' => '089-2' ]);
+        DB::table('bancos')->insert(['nome' => 'COOPERATIVA UNICRED CENTRAL SANTA CATARINA', 'codigo' => '087-6' ]);
+        DB::table('bancos')->insert(['nome' => 'COOPERATIVO DO BRASIL S.A. - BANCOOB', 'codigo' => '756' ]);
+        DB::table('bancos')->insert(['nome' => 'COOPERATIVO SICREDI S.A.', 'codigo' => '748' ]);
+        DB::table('bancos')->insert(['nome' => 'CR2 S.A.', 'codigo' => '75' ]);
+        DB::table('bancos')->insert(['nome' => 'CREDIBEL S.A.', 'codigo' => '721' ]);
+        DB::table('bancos')->insert(['nome' => 'CREDICOROL COOPERATIVA DE CRÉDITO RURAL', 'codigo' => '098-1' ]);
+        DB::table('bancos')->insert(['nome' => 'CREDIT AGRICOLE BRASIL S.A.', 'codigo' => '222' ]);
+        DB::table('bancos')->insert(['nome' => 'CREDIT SUISSE (BRASIL) S.A.', 'codigo' => '505' ]);
+        DB::table('bancos')->insert(['nome' => 'CRUZEIRO DO SUL S.A.', 'codigo' => '229' ]);
+        DB::table('bancos')->insert(['nome' => 'DA AMAZÔNIA S.A.', 'codigo' => '3' ]);
+        DB::table('bancos')->insert(['nome' => 'DA CHINA BRASIL S.A.', 'codigo' => '083-3' ]);
+        DB::table('bancos')->insert(['nome' => 'DAIMLERCHRYSLER S.A.', 'codigo' => 'M21' ]);
+        DB::table('bancos')->insert(['nome' => 'DAYCOVAL S.A.', 'codigo' => '707' ]);
+        DB::table('bancos')->insert(['nome' => 'DE LA NACION ARGENTINA', 'codigo' => '300' ]);
+        DB::table('bancos')->insert(['nome' => 'DE LA PROVINCIA DE BUENOS AIRES', 'codigo' => '495' ]);
+        DB::table('bancos')->insert(['nome' => 'DE LA REPUBLICA ORIENTAL DEL URUGUAY', 'codigo' => '494' ]);
+        DB::table('bancos')->insert(['nome' => 'DE LAGE LANDEN BRASIL S.A.', 'codigo' => 'M06' ]);
+        DB::table('bancos')->insert(['nome' => 'DE PERNAMBUCO S.A. - BANDEPE', 'codigo' => '24' ]);
+        DB::table('bancos')->insert(['nome' => 'DE TOKYO-MITSUBISHI UFJ BRASIL S.A.', 'codigo' => '456' ]);
+        DB::table('bancos')->insert(['nome' => 'DEUTSCHE BANK S.A. - ALEMÃO', 'codigo' => '487' ]);
+        DB::table('bancos')->insert(['nome' => 'DIBENS S.A.', 'codigo' => '214' ]);
+        DB::table('bancos')->insert(['nome' => 'DO BRASIL S.A.', 'codigo' => '1' ]);
+        DB::table('bancos')->insert(['nome' => 'DO ESTADO DE SERGIPE S.A.', 'codigo' => '47' ]);
+        DB::table('bancos')->insert(['nome' => 'DO ESTADO DO PARÁ S.A.', 'codigo' => '37' ]);
+        DB::table('bancos')->insert(['nome' => 'DO ESTADO DO PIAUÍ S.A. - BEP', 'codigo' => '39' ]);
+        DB::table('bancos')->insert(['nome' => 'DO ESTADO DO RIO GRANDE DO SUL S.A.', 'codigo' => '41' ]);
+        DB::table('bancos')->insert(['nome' => 'DO NORDESTE DO BRASIL S.A.', 'codigo' => '4' ]);
+        DB::table('bancos')->insert(['nome' => 'DRESDNER BANK BRASIL S.A. - MÚLTIPLO', 'codigo' => '751' ]);
+        DB::table('bancos')->insert(['nome' => 'FATOR S.A.', 'codigo' => '265' ]);
+        DB::table('bancos')->insert(['nome' => 'FIAT S.A.', 'codigo' => 'M03' ]);
+        DB::table('bancos')->insert(['nome' => 'FIBRA S.A.', 'codigo' => '224' ]);
+        DB::table('bancos')->insert(['nome' => 'FICSA S.A.', 'codigo' => '626' ]);
+        DB::table('bancos')->insert(['nome' => 'FORD S.A.', 'codigo' => 'M18' ]);
+        DB::table('bancos')->insert(['nome' => 'GE CAPITAL S.A.', 'codigo' => '233' ]);
+        DB::table('bancos')->insert(['nome' => 'GERDAU S.A.', 'codigo' => '734' ]);
+        DB::table('bancos')->insert(['nome' => 'GMAC S.A.', 'codigo' => 'M07' ]);
+        DB::table('bancos')->insert(['nome' => 'GOLDMAN SACHS DO BRASIL MÚLTIPLO S.A.', 'codigo' => '64' ]);
+        DB::table('bancos')->insert(['nome' => 'GUANABARA S.A.', 'codigo' => '612' ]);
+        DB::table('bancos')->insert(['nome' => 'HIPERCARD MÚLTIPLO S.A.', 'codigo' => '62' ]);
+        DB::table('bancos')->insert(['nome' => 'HONDA S.A.', 'codigo' => 'M22' ]);
+        DB::table('bancos')->insert(['nome' => 'HSBC BANK BRASIL S.A. - MÚLTIPLO', 'codigo' => '399' ]);
+        DB::table('bancos')->insert(['nome' => 'HSBC FINANCE (BRASIL) S.A. - MÚLTIPLO', 'codigo' => '168' ]);
+        DB::table('bancos')->insert(['nome' => 'IBI S.A. MÚLTIPLO', 'codigo' => '63' ]);
+        DB::table('bancos')->insert(['nome' => 'IBM S.A.', 'codigo' => 'M11' ]);
+        DB::table('bancos')->insert(['nome' => 'INDUSTRIAL DO BRASIL S.A.', 'codigo' => '604' ]);
+        DB::table('bancos')->insert(['nome' => 'INDUSTRIAL E COMERCIAL S.A.', 'codigo' => '320' ]);
+        DB::table('bancos')->insert(['nome' => 'INDUSVAL S.A.', 'codigo' => '653' ]);
+        DB::table('bancos')->insert(['nome' => 'ING BANK N.V.', 'codigo' => '492' ]);
+        DB::table('bancos')->insert(['nome' => 'INTERCAP S.A.', 'codigo' => '630' ]);
+        DB::table('bancos')->insert(['nome' => 'INTERMEDIUM S.A.', 'codigo' => '077-9' ]);
+        DB::table('bancos')->insert(['nome' => 'INVESTCRED UNIS.A.', 'codigo' => '249' ]);
+        DB::table('bancos')->insert(['nome' => 'ITAÚ BBA S.A.', 'codigo' => '184' ]);
+        DB::table('bancos')->insert(['nome' => 'ITAÚ UNIHOLDING S.A.', 'codigo' => '652' ]);
+        DB::table('bancos')->insert(['nome' => 'ITAÚ UNIS.A.', 'codigo' => '341' ]);
+        DB::table('bancos')->insert(['nome' => 'ITAÚBANK S.A', 'codigo' => '479' ]);
+        DB::table('bancos')->insert(['nome' => 'ITAUCRED FINANCIAMENTOS S.A.', 'codigo' => 'M09' ]);
+        DB::table('bancos')->insert(['nome' => 'J. P. MORGAN S.A.', 'codigo' => '376' ]);
+        DB::table('bancos')->insert(['nome' => 'J. SAFRA S.A.', 'codigo' => '74' ]);
+        DB::table('bancos')->insert(['nome' => 'JBS S.A.', 'codigo' => '79' ]);
+        DB::table('bancos')->insert(['nome' => 'JOHN DEERE S.A.', 'codigo' => '217' ]);
+        DB::table('bancos')->insert(['nome' => 'JPMORGAN CHASE BANK', 'codigo' => '488' ]);
+        DB::table('bancos')->insert(['nome' => 'KDB S.A.', 'codigo' => '76' ]);
+        DB::table('bancos')->insert(['nome' => 'KEB DO BRASIL S.A.', 'codigo' => '757' ]);
+        DB::table('bancos')->insert(['nome' => 'LUSO BRASILEIRO S.A.', 'codigo' => '600' ]);
+        DB::table('bancos')->insert(['nome' => 'MATONE S.A.', 'codigo' => '212' ]);
+        DB::table('bancos')->insert(['nome' => 'MÁXIMA S.A.', 'codigo' => '243' ]);
+        DB::table('bancos')->insert(['nome' => 'MAXINVEST S.A.', 'codigo' => 'M12' ]);
+        DB::table('bancos')->insert(['nome' => 'MERCANTIL DO BRASIL S.A.', 'codigo' => '389' ]);
+        DB::table('bancos')->insert(['nome' => 'MODAL S.A.', 'codigo' => '746' ]);
+        DB::table('bancos')->insert(['nome' => 'MONEO S.A.', 'codigo' => 'M10' ]);
+        DB::table('bancos')->insert(['nome' => 'MORADA S.A.', 'codigo' => '738' ]);
+        DB::table('bancos')->insert(['nome' => 'MORGAN STANLEY S.A.', 'codigo' => '66' ]);
+        DB::table('bancos')->insert(['nome' => 'NATIXIS BRASIL S.A. MÚLTIPLO', 'codigo' => '14' ]);
+        DB::table('bancos')->insert(['nome' => 'NBC BANK BRASIL S.A. - MÚLTIPLO', 'codigo' => '753' ]);
+        DB::table('bancos')->insert(['nome' => 'OBOE CRÉDITO FINANCIAMENTO E INVESTIMENTO S.A.', 'codigo' => '086-8' ]);
+        DB::table('bancos')->insert(['nome' => 'OPPORTUNITY S.A.', 'codigo' => '45' ]);
+        DB::table('bancos')->insert(['nome' => 'OURINVEST S.A.', 'codigo' => 'M17' ]);
+        DB::table('bancos')->insert(['nome' => 'PANAMERICANO S.A.', 'codigo' => '623' ]);
+        DB::table('bancos')->insert(['nome' => 'PARANÁ S.A.', 'codigo' => '254' ]);
+        DB::table('bancos')->insert(['nome' => 'PAULISTA S.A.', 'codigo' => '611' ]);
+        DB::table('bancos')->insert(['nome' => 'PECÚNIA S.A.', 'codigo' => '613' ]);
+        DB::table('bancos')->insert(['nome' => 'PETRA S.A.', 'codigo' => '094-2' ]);
+        DB::table('bancos')->insert(['nome' => 'PINE S.A.', 'codigo' => '643' ]);
+        DB::table('bancos')->insert(['nome' => 'PORTO SEGURO S.A.', 'codigo' => '724' ]);
+        DB::table('bancos')->insert(['nome' => 'POTTENCIAL S.A.', 'codigo' => '735' ]);
+        DB::table('bancos')->insert(['nome' => 'PROSPER S.A.', 'codigo' => '638' ]);
+        DB::table('bancos')->insert(['nome' => 'PSA FINANCE BRASIL S.A.', 'codigo' => 'M24' ]);
+        DB::table('bancos')->insert(['nome' => 'RABOBANK INTERNATIONAL BRASIL S.A.', 'codigo' => '747' ]);
+        DB::table('bancos')->insert(['nome' => 'RANDON S.A.', 'codigo' => '088-4' ]);
+        DB::table('bancos')->insert(['nome' => 'REAL S.A.', 'codigo' => '356' ]);
+        DB::table('bancos')->insert(['nome' => 'RENDIMENTO S.A.', 'codigo' => '633' ]);
+        DB::table('bancos')->insert(['nome' => 'RIBEIRÃO PRETO S.A.', 'codigo' => '741' ]);
+        DB::table('bancos')->insert(['nome' => 'RODOBENS S.A.', 'codigo' => 'M16' ]);
+        DB::table('bancos')->insert(['nome' => 'RURAL MAIS S.A.', 'codigo' => '72' ]);
+        DB::table('bancos')->insert(['nome' => 'RURAL S.A.', 'codigo' => '453' ]);
+        DB::table('bancos')->insert(['nome' => 'SAFRA S.A.', 'codigo' => '422' ]);
+        DB::table('bancos')->insert(['nome' => 'SANTANDER (BRASIL) S.A.', 'codigo' => '33' ]);
+        DB::table('bancos')->insert(['nome' => 'SCHAHIN S.A.', 'codigo' => '250' ]);
+        DB::table('bancos')->insert(['nome' => 'SEMEAR S.A.', 'codigo' => '743' ]);
+        DB::table('bancos')->insert(['nome' => 'SIMPLES S.A.', 'codigo' => '749' ]);
+        DB::table('bancos')->insert(['nome' => 'SOCIÉTÉ GÉNÉRALE BRASIL S.A.', 'codigo' => '366' ]);
+        DB::table('bancos')->insert(['nome' => 'SOFISA S.A.', 'codigo' => '637' ]);
+        DB::table('bancos')->insert(['nome' => 'STANDARD DE INVESTIMENTOS S.A.', 'codigo' => '12' ]);
+        DB::table('bancos')->insert(['nome' => 'SUMITOMO MITSUI BRASILEIRO S.A.', 'codigo' => '464' ]);
+        DB::table('bancos')->insert(['nome' => 'TOPÁZIO S.A.', 'codigo' => '082-5' ]);
+        DB::table('bancos')->insert(['nome' => 'TOYOTA DO BRASIL S.A.', 'codigo' => 'M20' ]);
+        DB::table('bancos')->insert(['nome' => 'TRIÂNGULO S.A.', 'codigo' => '634' ]);
+        DB::table('bancos')->insert(['nome' => 'TRICURY S.A.', 'codigo' => 'M13' ]);
+        DB::table('bancos')->insert(['nome' => 'UNI- UNIÃO DE BANCOS BRASILEIROS S.A.', 'codigo' => '409' ]);
+        DB::table('bancos')->insert(['nome' => 'UNICARD MÚLTIPLO S.A.', 'codigo' => '230' ]);
+        DB::table('bancos')->insert(['nome' => 'UNICRED CENTRAL DO RIO GRANDE DO SUL', 'codigo' => '091-4' ]);
+        DB::table('bancos')->insert(['nome' => 'UNICRED NORTE DO PARANÁ', 'codigo' => '84' ]);
+        DB::table('bancos')->insert(['nome' => 'VOLKSWAGEN S.A.', 'codigo' => 'M14' ]);
+        DB::table('bancos')->insert(['nome' => 'VOLVO (BRASIL) S.A.', 'codigo' => 'M23' ]);
+        DB::table('bancos')->insert(['nome' => 'VOTORANTIM S.A.', 'codigo' => '655' ]);
+        DB::table('bancos')->insert(['nome' => 'VR S.A.', 'codigo' => '610' ]);
+        DB::table('bancos')->insert(['nome' => 'WESTLB DO BRASIL S.A.', 'codigo' => '370' ]);
+           
+
+
+    }
+}

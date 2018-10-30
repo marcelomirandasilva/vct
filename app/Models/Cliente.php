@@ -7,26 +7,23 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
 
 
-class Parceiro extends Model implements AuditableContract
+class Cliente extends Model implements AuditableContract
 {
    use \OwenIt\Auditing\Auditable, SoftDeletes;
 
 
     protected $dates = ['deleted_at'];
-    protected $table = "parceiros";
 
     protected $fillable =[
         'nome',
         'telefone1',
         'telefone2',
         'telefone3',
-        'email',
+        'nascimento',
         
-        'tipo_cadastro',
-        'cadastro',
-        'site',
-        'facebook',
-        'instagram',
+        'email',
+        'cpf',
+        
         'banco_id',
         'conta',
         'agencia',
@@ -39,15 +36,11 @@ class Parceiro extends Model implements AuditableContract
         'numero',
         'complemento',
         'cep',
+        'obs'
     ];
 
     public function banco()
     {
     	return $this->belongsTo('App\Models\Banco','banco_id');
     }  
-
-    public function produtos()
-	{
-		return $this->hasMany('App\Models\Produtos');
-	}	
 }
