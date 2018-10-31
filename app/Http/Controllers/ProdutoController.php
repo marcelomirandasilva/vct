@@ -30,14 +30,17 @@ class ProdutoController extends Controller
 	public function create()
 	{
 
-		$parceiros   			= Parceiro::orderBy('nome')->get();
+		$parceiros = Parceiro::orderBy('nome')->get();
+		$unidades  = pegaValorEnum('produtos', 'unidade');
 
-		return view('produto.create',compact('parceiros'));
+		return view('produto.create',compact('parceiros','unidades'));
 		
 	}
 
 	public function store(Request $request)
 	{
+		dd($request->all());
+
 		$request->merge(['telefone1' => retiraMascaraTelefone($request->telefone1)]);
 		$request->merge(['telefone2' => retiraMascaraTelefone($request->telefone2)]);
 		$request->merge(['telefone3' => retiraMascaraTelefone($request->telefone3)]);
@@ -48,7 +51,6 @@ class ProdutoController extends Controller
 			'nome'      => 'required|min:5|max:100',
 		]);
 		
-		//dd($request->all());
 
 		//inicia sessão de banco
 		DB::beginTransaction();

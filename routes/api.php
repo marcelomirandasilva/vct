@@ -13,11 +13,11 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
+/* Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 /// rota para buscar veiculos de uma determinada secretaria
 Route::get("/veiculosPorSecretaria/{sec}/{user}", "Api\VeiculoController@veiculosPorSecretaria");
 
 
-
+ */

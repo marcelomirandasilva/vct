@@ -20,11 +20,10 @@ class Produto extends Model implements AuditableContract
         'parceiro_id',
         'unidade',
         'quantidade',
-        'gramas',
-        'mililitros',
-        'unidades',
-        'preco_compra',
-        'preco_venda',
+        'valor_compra',
+        'valor_venda',
+        'valor_compra_unidade',
+        'valor_venda_unidade',
     ];
 
     public function parceiro()

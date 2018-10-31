@@ -19,16 +19,15 @@ class CreateProdutosTable extends Migration
 
             $table->string('nome',100);
             $table->integer('parceiro_id')                  ->unsigned();
-
+ 
             $table->enum('unidade',['g','kg','ml','l','un','maço','cx','dz','1/2 dz']);
             $table->float('quantidade', 5, 2);
 
-            $table->integer('gramas')           ->nullable();
-            $table->integer('mililitros')       ->nullable();
-            $table->integer('unidades')         ->nullable();
-
-            $table->float('preco_compra', 5, 2);
-            $table->float('preco_venda', 5, 2);
+            $table->float('valor_compra', 6, 3);
+            $table->float('valor_venda', 6, 3);
+            
+            $table->float('valor_compra_unidade', 9, 6);
+            $table->float('valor_venda_unidade', 9, 6);
             
             $table->timestamps();
             $table->softDeletes();

@@ -5,188 +5,143 @@
 @section('content')
 	<div class="x_panel modal-content ">
 		<div class="x_title">
-			<h2> Cadastro de Parceiros </h2>
+			<h2> Cadastro de Produtos </h2>
 			<div class="clearfix"></div>
 		</div>
 
 		<div class="x_panel ">
 			<div class="x_content">
-				@if( isset($parceiro))
-					<form id="frm_parceiro" class="form-horizontal form-label-left" method="post" action="{{url("parceiro/$parceiro->id")}}">
+				@if( isset($produto))
+					<form id="frm_produto" class="form-horizontal form-label-left" method="post" action="{{url("produto/$produto->id")}}">
 					{!! method_field('PUT') !!}
 
 				@else
-					<form id="frm_parceiro" class="form-horizontal form-label-left" method="post" action="{{route('parceiro.store') }}">
+					<form id="frm_produto" class="form-horizontal form-label-left" method="post" action="{{route('produto.store') }}">
 				@endif
 					
 					{{csrf_field()}}
 												
 					<div class="form-group">
 						<label class="control-label col-md-1 col-sm-1 col-xs-12" for="nome">Nome</label>
-						<div class="col-md-6 col-sm-6 col-xs-12">
+						<div class="col-md-5 col-sm-5 col-xs-12">
 							<input type="text" id="nome" class="form-control" name="nome" 
-							value="{{$parceiro->nome or old('nome')}}" autofocus>
+							value="{{$produto->nome or old('nome')}}" autofocus>
 						</div>
 
-						<label class="control-label col-md-1 col-sm-2 col-xs-12" for="email">Email</label>
-						<div class="col-md-4 col-sm-4 col-xs-12">
-							<input type="email" id="email" class="form-control" name="email" 
-							value="{{$parceiro->email or old('email')}}">
+						<label class="control-label col-md-1 col-sm-1 col-xs-12" for="parceiro_id"> Parceiro </label>
+						<div class="col-md-5 col-sm-5 col-xs-12">
+							<select name="parceiro_id" id="parceiro_id" class="form-control col-md-1" >
+								@if (isset($produto)) <!-- variavel para verificar se foi chamado pela edição -->
+									@foreach($parceiros as $parceiro)
+										@if ( $produto->parceiro_id == $parceiro->id)
+											<option value="{{$parceiro->id}}" selected="selected">{{$parceiro->nome}}</option>
+										@else
+											<option value="{{$parceiro->id}}">{{$parceiro->nome}}</option>  
+										@endif
+									@endforeach
+								@else
+									@foreach($parceiros as $parceiro)
+										<option value="{{$parceiro->id}}"> {{$parceiro->nome}} </option>    
+									@endforeach
+								@endif
+							</select>
 						</div>
 					</div>
 
 	
 
 					<div class="form-group">
-							<label class="control-label col-md-1 col-sm-1 col-xs-12" for="telefone1">Telefone 1</label>
-							<div class="col-md-3 col-sm-3 col-xs-12">
-								<input type="text" id="telefone1" class="form-control" name="telefone1" 
-								value="{{$parceiro->telefone1 or old('telefone1')}}">
-							</div>
-	
-							<label class="control-label col-md-1 col-sm-1 col-xs-12" for="telefone2">Telefone 2</label>
-							<div class="col-md-3 col-sm-3 col-xs-12">
-								<input type="text" id="telefone2" class="form-control" name="telefone2" 
-								value="{{$parceiro->telefone2 or old('telefone2')}}">
-							</div>
-	
-							<label class="control-label col-md-1 col-sm-1 col-xs-12" for="telefone3">Telefone 3</label>
-							<div class="col-md-3 col-sm-3 col-xs-12">
-								<input type="text" id="telefone3" class="form-control" name="telefone3" 
-								value="{{$parceiro->telefone3 or old('telefone3')}}">
-							</div>
+						<label class="control-label col-md-1 col-sm-1 col-xs-12" for="unidade"> Unidade </label>
+						<div class="col-md-2 col-sm-2 col-xs-12">
+							<select name="unidade" id="unidade" class="form-control col-md-1" >
+								@if (isset($produto)) <!-- variavel para verificar se foi chamado pela edição -->
+									@foreach($unidades as $unidade)
+										@if ( $produto->unidade == $unidade)
+											<option value="{{$unidade}}" selected="selected">{{$unidade}}</option>
+										@else
+											<option value="{{$unidade}}">{{$unidade}}</option>  
+										@endif
+									@endforeach
+								@else
+									@foreach($unidades as $unidade)
+										<option value="{{$unidade}}"> {{$unidade}} </option>    
+									@endforeach
+								@endif
+							</select>
 						</div>
 
-					<div class="form-group">
-						<label class="control-label col-md-1 col-sm-1 col-xs-12 " for="pais">Pais</label>
+						<label class="control-label col-md-1 col-sm-1 col-xs-12" for="quantidade">Quantidade</label>
 						<div class="col-md-2 col-sm-2 col-xs-12">
-							<input type="text" id="pais" class="form-control" name="pais" 
-							value="{{$parceiro->pais or old('pais')}}">
+							<input type="number" id="quantidade" class="form-control" name="quantidade" 
+							value="{{$produto->quantidade or old('quantidade')}}">
+						</div>
+						
+						<label class="control-label col-md-1 col-sm-1 col-xs-12 " for="valor_compra">V.Compra</label>
+						<div class="col-md-2 col-sm-2 col-xs-12">
+							<input type="number"  step="any" id="valor_compra" class="form-control money" name="valor_compra" 
+							value="{{$produto->valor_compra or old('valor_compra')}}">
+						</div> 
+
+						<label class="control-label col-md-1 col-sm-1 col-xs-12 " for="valor_venda">V.Venda</label>
+						<div class="col-md-2 col-sm-2 col-xs-12">
+							<input type="number"  step="any" id="valor_venda" class="form-control money" name="valor_venda" 
+							value="{{$produto->valor_venda or old('valor_venda')}}">
 						</div> 
 		
-						<label class="control-label col-md-1 col-sm-1 col-xs-12" for="cep">CEP</label>
-						<div class="col-md-2 col-sm-2 col-xs-12">
-							<input id="cep" name="cep" type="text" placeholder="99.999-999" class="form-control input-md cep" 
-								value="{{$parceiro->cep or old('cep')}}" >
-						</div>
-						<label class="control-label col-md-1 col-sm-1 col-xs-12" for="uf">UF</label>
-						<div class="col-md-1 col-sm-1 col-xs-12">
-							<input id="uf" name="uf" type="text"  class="form-control input-md uf"
-								value="{{$parceiro->uf or old('uf')}}" >
-						</div>
-						<label class="control-label col-md-1 col-sm-1 col-xs-12" for="municipio">Município</label>
-						<div class="col-md-3 col-sm-3 col-xs-12">
-							<input id="municipio" name="municipio" type="text" class="form-control input-md" 
-								value="{{$parceiro->municipio or old('municipio')}}" >
-						</div>
-					</div>
-
-					<div class="item form-group">
-	
-						<label class="control-label col-md-1 col-sm-1 col-xs-12" for="bairro">Bairro</label>
-						<div class="col-md-3 col-sm-3 col-xs-12">
-							<input id="bairro" name="bairro" type="text" placeholder="Centro" class="form-control input-md"
-									value="{{$parceiro->bairro or old('bairro')}}" >
-						</div>
-						<label class="control-label col-md-1 col-sm-1 col-xs-12" for="logradouro">Logradouro</label>
-						<div class="col-md-4 col-sm-4 col-xs-12">
-							<input id="logradouro" name="logradouro" type="text" placeholder="Av, Rua, Travessa..." class="form-control input-md"
-								value="{{$parceiro->logradouro or old('logradouro')}}" >
-						</div>
-						<label class="control-label col-md-1 col-sm-1 col-xs-12" for="numero">Numero</label>
-						<div class="col-md-2 col-sm-2 col-xs-12">
-							<input id="numero" name="numero" type="text" placeholder="999" class="form-control input-md"
-								value="{{$parceiro->numero or old('numero')}}" >
-						</div>
 					</div>
 
 					<div class="ln_solid"> </div>
 
-					<div class="item form-group">
-						<i class="control-label col-md-1 col-sm-1 col-xs-12 fab fa-chrome" style="font-size: 18pt"> </i>
-						<div class="col-md-10 col-sm-10 col-xs-12">
-							<input id="site" name="site" type="url" class="form-control input-md"
-									value="{{$parceiro->site or old('site')}}" >
-						</div>
-					</div>
-
-					<div class="item form-group">
-						<i class="control-label col-md-1 col-sm-1 col-xs-12 fab fa-facebook" style="font-size: 18pt"> </i>
-						<div class="col-md-10 col-sm-10 col-xs-12">
-							<input id="facebook" name="facebook" type="url" class="form-control input-md"
-									value="{{$parceiro->facebook or old('facebook')}}" >
-						</div>
-					</div>
-
-					<div class="item form-group">
-							<i class="control-label col-md-1 col-sm-1 col-xs-12 fab fa-instagram" style="font-size: 18pt"> </i>
-							<div class="col-md-10 col-sm-10 col-xs-12">
-								<input id="instagram" name="instagram" type="url" class="form-control input-md"
-										value="{{$parceiro->instagram or old('instagram')}}" >
-							</div>
-						</div>
-
-					<div class="ln_solid"> </div>
-
-					<div class="item form-group">
-						<label class="control-label col-md-1 col-sm-1 col-xs-12" for="tipo_cadastro"> Cadastro </label>
+					<div class="form-group">
+						<label class="control-label col-md-2 col-sm-2 col-xs-12 " id="lbl_dif_per" for="dif_per">
+								Diferença em %
+						</label>
 						<div class="col-md-2 col-sm-2 col-xs-12">
-							<select name="tipo_cadastro" id="tipo_cadastro" class="form-control col-md-1" >
-								@if (isset($parceiro)) <!-- variavel para verificar se foi chamado pela edição -->
-									@foreach($tipos_cadastro as $tipo_cadastro)
-										@if ( $parceiro->tipo_cadastro == $tipo_cadastro)
-											<option value="{{$tipo_cadastro}}" selected="selected">{{$tipo_cadastro}}</option>
-										@else
-											<option value="{{$tipo_cadastro}}">{{$tipo_cadastro}}</option>  
-										@endif
-									@endforeach
-								@else
-									@foreach($tipos_cadastro as $tipo_cadastro)
-										<option value="{{$tipo_cadastro}}"> {{$tipo_cadastro}} </option>    
-									@endforeach
-								@endif
-							</select>
+							<input type="text" class="form-control" id="dif_per" disabled value="">
 						</div>
 
-						<div class="col-md-3 col-sm-3 col-xs-12">
-							<input id="cadastro" name="cadastro" type="text" class="form-control input-md"
-								value="{{$parceiro->cadastro or old('cadastro')}}" >
-						</div>
-					</div>
-
-					<div class="item form-group">
-						<label class="control-label col-md-1 col-sm-1 col-xs-12" for="banco"> Banco </label>
-						<div class="col-md-5 col-sm-5 col-xs-12">
-							<select name="banco" id="banco" class="form-control col-md-1" >
-								@if (isset($parceiro)) <!-- variavel para verificar se foi chamado pela edição -->
-									@foreach($bancos as $banco)
-										@if ( $parceiro->banco == $banco)
-											<option value="{{$banco->id}}" selected="selected">{{$banco->nome}} - {{$banco->codigo}}</option>
-										@else
-											<option value="{{$banco->id}}">{{$banco->nome}} - {{$banco->codigo}}</option>  
-										@endif
-									@endforeach
-								@else
-									@foreach($bancos as $banco)
-										<option value="{{$banco->id}}"> {{$banco->nome}} - {{$banco->codigo}} </option>    
-									@endforeach
-								@endif
-							</select>
-						</div>
-
-						<label class="control-label col-md-1 col-sm-1 col-xs-12" for="agencia">Agência</label>
+						<label class="control-label col-md-2 col-sm-2 col-xs-12 " id="lbl_dif_rea" for="dif_rea">
+								Diferença em R$
+						</label>
 						<div class="col-md-2 col-sm-2 col-xs-12">
-							<input id="agencia" name="agencia" type="text" placeholder="Centro" class="form-control input-md"
-									value="{{$parceiro->agencia or old('agencia')}}" >
+							<input type="text" class="form-control" id="dif_rea" disabled value="">
 						</div>
 
-						<label class="control-label col-md-1 col-sm-1 col-xs-12" for="conta">Conta</label>
-						<div class="col-md-2 col-sm-2 col-xs-12">
-							<input id="conta" name="conta" type="text" placeholder="Centro" class="form-control input-md"
-									value="{{$parceiro->conta or old('conta')}}" >
-						</div>
 					</div>
 					
+					<div class="ln_solid"> </div>
+
+					<div class="form-group">
+
+						<label class="control-label col-md-2 col-sm-2 col-xs-12 " id="lbl_compra_unidade" for="compra_unidade">
+							Valor de compra do Grama
+						</label>
+						<div class="col-md-2 col-sm-2 col-xs-12">
+							<input type="text" class="form-control money" id="compra_unidade" disabled 
+								value=" {{ $produto->valor_compra_unidade or old('valor_compra_unidade') }} ">
+						</div>
+
+
+						<label class="control-label col-md-2 col-sm-2 col-xs-12 " id="lbl_venda_unidade" for="venda_unidade">
+							Valor de venda do Grama
+						</label>
+						<div class="col-md-2 col-sm-2 col-xs-12">
+							<input type="text" class="form-control" id="venda_unidade" disabled 
+								value=" {{ $produto->valor_venda_unidade or old('valor_venda_unidade') }} ">
+								
+						</div>
+
+						
+						<input type="hidden" id="valor_compra_unidade" name="valor_compra_unidade" >
+						<input type="hidden" id="valor_venda_unidade"  name="valor_venda_unidade" >
+					</div>
+
+					
+
+
+					<div class="ln_solid"> </div>
+
+				
 					
 					{{-- BOTÕES --}}
 					<div class="ln_solid"> </div>
@@ -214,64 +169,180 @@
 	{{-- Vanilla Masker --}}
 	<script src="{{asset('js/vanillaMasker.min.js')}}"></script>
 
-	{{-- Atualiza os campos do endereço de acordo com o cep digitado --}}
-	<script src="{{asset("js/endereco.js")}}"></script>
+	
 	
 	<script>
-		VMasker ($("#cadastro")).maskPattern("99.999.999/9999-99");
-
-		if( $('#tipo_cadastro option:selected').val() == 'CPF' ){
-			VMasker ($("#cadastro")).maskPattern("999.999.999-99");
-		}else{
-			VMasker ($("#cadastro")).maskPattern("99.999.999/9999-99");
-		}
-
+	
 		$(document).ready(function(){
 
-		/* 	var SPMaskBehavior = function (val) {
-				return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
-			},
-			spOptions = {
-				onKeyPress: function(val, e, field, options) {
-					field.mask(SPMaskBehavior.apply({}, arguments), options);
-				}
-			};
-
-			$('#telefone1').mask(SPMaskBehavior, spOptions);
-			$('#telefone2').mask(SPMaskBehavior, spOptions);
-			$('#telefone3').mask(SPMaskBehavior, spOptions); */
-
-			$('#telefone1, #telefone2, #telefone3').mask("+99 (99) 9999-9999Z", {
-				translation: {
-					'Z': {
-						pattern: /[0-9]/, optional: true
-					}
-				}
-			});
-
-			//transforma todas as letras do input em MAIÚSCULAS
-			/* $('input').keyup(function() {
-        		this.value = this.value.toLocaleUpperCase();
+			/* VMasker($(".money")).maskMoney({
+				// Decimal precision -> "900"
+				precision: 2,
+				// Decimal separator -> ",90"
+				separator: ',',
+				// Number delimiter -> "12.345.678"
+				delimiter: '.',
+				// Money unit -> "R$ 12.345.678,90"
+				unit: 'R$',
+				// Force type only number instead decimal,
+				// masking decimals with ",00"
+				// Zero cents -> "R$ 1.234.567.890,00"
+				//zeroCents: true
 			}); */
 
+
+			$("select#unidade").change(function() {
+				
+				$v_unidade = $("select#unidade option:selected").val();
+				console.log($v_unidade);
+				switch ($v_unidade) {
+		
+					case 'kg':
+						$("label#lbl_compra_unidade").html("Valor de compra do Grama");
+						$("label#lbl_venda_unidade").html("Valor de venda do Grama");
+
+						//$("input#compra_unidade").val(res['gasolina'].toFixed(3).replace(".",","));
+						break;
+
+					case 'g':
+						$("label#lbl_compra_unidade").html("Valor de compra do Grama");
+						$("label#lbl_venda_unidade").html("Valor de venda do Grama");
+						break;
+
+					case 'l':
+						$("label#lbl_compra_unidade").html("Valor de compra do Mililitro");
+						$("label#lbl_venda_unidade").html("Valor de venda do Mililitro");
+						break;
+
+					case 'ml':
+						$("label#lbl_compra_unidade").html("Valor de compra do Mililitro");
+						$("label#lbl_venda_unidade").html("Valor de venda do Mililitro");
+						break;
+
+					case 'un':
+						$("label#lbl_compra_unidade").html("Valor de compra da Unidade");
+						$("label#lbl_venda_unidade").html("Valor de venda da Unidade");
+						break;
+
+					case 'cx':
+						$("label#lbl_compra_unidade").html("Valor de compra da Caixa");
+						$("label#lbl_venda_unidade").html("Valor de venda da Caixa");
+						break;
+
+					case 'dz':
+						$("label#lbl_compra_unidade").html("Valor de compra da Unidade");
+						$("label#lbl_venda_unidade").html("Valor de venda da Unidade");
+						break;
+
+					case '1/2 dz':
+						$("label#lbl_compra_unidade").html("Valor de compra da Unidade");
+						$("label#lbl_venda_unidade").html("Valor de venda da Unidade");
+						break;
+					
+					case 'maço':
+						$("label#lbl_compra_unidade").html("Valor de compra do Maço");
+						$("label#lbl_venda_unidade").html("Valor de venda do Maço");
+						break;
+					
+				}
+			
+  			})
+
+			$("input#valor_compra").focusin(function() {
+				//limpa os campos
+				$("input#modelo").val("");
+				$("input#cor").val("");
+				$("input#combustivel").val("");
+				$("input#secretaria").val("");
+				
+			});
+
+			$("input#valor_compra").focusout(function() {
+				let divisor			= 1;
+				let unidade 		= $("select#unidade option:selected").val();
+				let valor_compra 	= parseInt(  $("input#valor_compra").val().replace(/[\D]+/g,'') ) / 100;
+				let qtd   			= $("input#quantidade").val();
+
+				let compra_unidade = valor_compra / qtd;
+
+				switch (unidade) {
+					case 'kg':		divisor = 1000; 	break;
+					case 'g':		divisor = 1; 		break;
+					case 'l':		divisor = 1000; 	break;
+					case 'ml':		divisor = 1; 		break;
+					case 'un':		divisor = 1; 		break;
+					case 'cx':		divisor = 1; 		break;
+					case 'dz':		divisor = 12; 	break;
+					case '1/2 dz':	divisor = 6; 		break;
+					case 'maço':	divisor = 1; 		break;
+				}
+
+				let mostra = compra_unidade / divisor;
+				$("input#compra_unidade").val(mostra.toLocaleString('pt-br',{style: 'currency', currency: 'BRL', maximumFractionDigits: 6}));
+				$("input#valor_compra_unidade").val(compra_unidade);
+
+			});
+
+			$("input#valor_venda").focusout(function() {
+				let divisor			= 1;
+				let unidade 		= $("select#unidade option:selected").val();
+				let valor_venda 	= parseInt(  $("input#valor_venda").val().replace(/[\D]+/g,'') ) / 100;
+				let qtd   			= $("input#quantidade").val();
+
+				let venda_unidade = valor_venda / qtd;
+
+				switch (unidade) {
+					case 'kg':		divisor = 1000; 	break;
+					case 'g':		divisor = 1; 		break;
+					case 'l':		divisor = 1000; 	break;
+					case 'ml':		divisor = 1; 		break;
+					case 'un':		divisor = 1; 		break;
+					case 'cx':		divisor = 1; 		break;
+					case 'dz':		divisor = 12; 	break;
+					case '1/2 dz':	divisor = 6; 		break;
+					case 'maço':	divisor = 1; 		break;
+				}
+
+				let mostra = venda_unidade / divisor;
+				$("input#venda_unidade").val(mostra.toLocaleString('pt-br',{style: 'currency', currency: 'BRL', maximumFractionDigits: 6}));
+				$("input#valor_venda_unidade").val(venda_unidade);
+
+				let V1 = converteMoedaFloat(  $("input#valor_compra").val() );
+				let V2 = converteMoedaFloat(  $("input#valor_venda").val());
+				
+				diferenca_per = (( V2 - V1 ) / V1 * 100);
+				diferenca_rea = ( V2 - V1 ) ;
+
+				$("input#dif_per").val( parseFloat(diferenca_per.toFixed(2)) );				
+
+				$("input#dif_rea").val( diferenca_rea );				
+
+			});
+
+	
 			//botão de cancelar
 			$("#btn_cancelar").click(function(){
 		      event.preventDefault();
 				window.history.back();
 	      });
 
-			//altera mascara
-			$('#tipo_cadastro').change(function(){
-				
-				if( $('#tipo_cadastro option:selected').val() == 'CPF' ){
-					VMasker ($("#cadastro")).maskPattern("999.999.999-99");
-				}else{
-					VMasker ($("#cadastro")).maskPattern("99.999.999/9999-99");
-				}
-			}); 
 
 			
 		});
+
+		function converteMoedaFloat(valor){
+      
+			if(valor === ""){
+				valor =  0;
+			}else{
+				valor = valor.replace("R$ ","");
+				valor = valor.replace(".","");
+				valor = valor.replace(",",".");
+				valor = parseFloat(valor);
+			}
+			return valor;
+
+		}
 	</script>
 
 @endpush
