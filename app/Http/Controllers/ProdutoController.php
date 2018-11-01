@@ -22,7 +22,8 @@ class ProdutoController extends Controller
 
 	public function index()
 	{
-		$produtos = Produto::orderBy('nome')->get();  
+		$produtos = Produto::all();  
+
 		return view('produto.lista',compact('produtos'));
 
 	}
@@ -39,18 +40,14 @@ class ProdutoController extends Controller
 
 	public function store(Request $request)
 	{
-		dd($request->all());
-
-		$request->merge(['telefone1' => retiraMascaraTelefone($request->telefone1)]);
-		$request->merge(['telefone2' => retiraMascaraTelefone($request->telefone2)]);
-		$request->merge(['telefone3' => retiraMascaraTelefone($request->telefone3)]);
-
-		$request->merge(['cadastro' => retiraMascaraCPF($request->cadastro)]);
-
-		$this->validate($request,[
-			'nome'      => 'required|min:5|max:100',
-		]);
 		
+		$request->merge(['valor_compra' => 
+		str_replace('R$ ', '', str_replace(',', '.', str_replace('.', '', $request->valor_compra))) ]);
+		
+		$request->merge(['valor_venda'  => 
+		str_replace('R$ ', '', str_replace(',', '.', str_replace('.', '', $request->valor_venda))) ]);
+		
+		//dd($request->all());
 
 		//inicia sessão de banco
 		DB::beginTransaction();
@@ -81,10 +78,11 @@ class ProdutoController extends Controller
 	public function edit(Produto $produto)
 	{
 
+		//dd($produto);
+		$parceiros = Parceiro::orderBy('nome')->get();
+		$unidades  = pegaValorEnum('produtos', 'unidade');
 		
-		$parceiros   			= Parceiro::orderBy('nome')->get();
-		
-		return view('produto.create',compact('produto','parceiros'));
+		return view('produto.create',compact('produto','parceiros','unidades'));
 	}
 	
 	

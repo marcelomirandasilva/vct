@@ -78,16 +78,14 @@
 						
 						<label class="control-label col-md-1 col-sm-1 col-xs-12 " for="valor_compra">V.Compra</label>
 						<div class="col-md-2 col-sm-2 col-xs-12">
-							<input type="text"  step="any" id="valor_compra" class="form-control " 
-								name="valor_compra"  
-								value="{{$produto->valor_compra or old('valor_compra')}}">
+							<input type="text"  step="any" id="valor_compra" class="form-control money" name="valor_compra" 
+							value="{{$produto->valor_compra or old('valor_compra')}}">
 						</div> 
 
 						<label class="control-label col-md-1 col-sm-1 col-xs-12 " for="valor_venda">V.Venda</label>
 						<div class="col-md-2 col-sm-2 col-xs-12">
-							<input type="text"  step="any" id="valor_venda" class="form-control " 
-								name="valor_venda"  
-								value="{{$produto->valor_venda or old('valor_venda')}}">
+							<input type="text"  step="any" id="valor_venda" class="form-control money" name="valor_venda" 
+							value="{{$produto->valor_venda or old('valor_venda')}}">
 						</div> 
 		
 					</div>
@@ -173,19 +171,14 @@
 @push("scripts")
 
 	{{-- Vanilla Masker --}}
-	{{-- <script src="{{asset('js/vanillaMasker.min.js')}}"></script>
-	<script src="{{asset('js/maskmoney/dist/jquery.maskMoney.min.js')}}" type="text/javascript"></script>
- --}}
-	<script src="{{asset('js/jQuery-Mask-Plugin/jquery.mask.min.js')}}" type="text/javascript"></script>
+	<script src="{{asset('js/vanillaMasker.min.js')}}"></script>
 
 	
 	
 	<script>
 
+		
 		if( {{ isset($produto) ? 'true' : 'false'  }}){
-			
-			
-			
 			let V1 = converteMoedaFloat(  $("input#valor_compra").val() );
 			let V2 = converteMoedaFloat(  $("input#valor_venda").val());
 			
@@ -200,20 +193,16 @@
 
 			//parseFloat(salario.replace('R$ ', '').replace(".", "").replace(',', '.').replace(/_/g, ''));
 		}
-		
 	
 		$(document).ready(function(){
-			
-			$("#valor_compra").mask("#.##0,00", {reverse: true});
-			$("#valor_venda").mask("#.##0,00", {reverse: true});
-			
+
 /* 			//botão de cancelar
 			$("#btn_cancelar").click(function(){
 		      event.preventDefault();
 				window.history.back();
 	      }); */
 
-/* 			VMasker($(".money")).maskMoney({
+			VMasker($(".money")).maskMoney({
 				// Decimal precision -> "900"
 				precision: 2,
 				// Decimal separator -> ",90"
@@ -227,12 +216,12 @@
 				// Zero cents -> "R$ 1.234.567.890,00"
 				//zeroCents: true
 			});
- */
+
 
 			$("select#unidade").change(function() {
 				
 				$v_unidade = $("select#unidade option:selected").val();
-				console.log($v_unidade);
+
 				switch ($v_unidade) {
 		
 					case 'kg':
@@ -285,6 +274,15 @@
 				}
 			
   			})
+
+			$("input#valor_compra").focusin(function() {
+				//limpa os campos
+				$("input#modelo").val("");
+				$("input#cor").val("");
+				$("input#combustivel").val("");
+				$("input#secretaria").val("");
+				
+			});
 
 			$("input#valor_compra").focusout(function() {
 				let divisor			= 1;

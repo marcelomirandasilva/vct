@@ -33,17 +33,15 @@
                <tbody>
                   @foreach($produtos as $key=> $produto)
                      <tr>
-                        <td>{{ $produto->nome }}</td> 
-                        <td>{{ $produto->quantidade }}</td> 
-                        <td>{{ $produto->unidade }}</td> 
-                        <td>{{ $produto->preco_compra }}</td> 
-                        <td>{{ $produto->preco_venda }}</td> 
+                        <td>{{$produto->nome}}</td> 
+                        <td>{{$produto->quantidade}}</td> 
+                        <td>{{$produto->unidade}}</td> 
+                        <td>{{$produto->valor_compra}}</td> 
+                        <td>{{$produto->valor_venda}}</td> 
                         
 
                         <td class="actions">
-                              
-                         
-                              
+                             
                            <a href="{{ url("produto/$produto->id/edit") }}" 
                               class="btn btn-warning btn-xs action botao_acao " 
                               data-toggle="tooltip" 
@@ -82,21 +80,30 @@
    <!-- Datatables -->
    <script type="text/javascript" src="https://cdn.datatables.net/v/bs/dt-1.10.18/af-2.3.0/b-1.5.2/b-flash-1.5.2/b-html5-1.5.2/b-print-1.5.2/cr-1.5.0/fc-3.2.5/fh-3.1.4/kt-2.4.0/r-2.2.2/rg-1.0.3/rr-1.2.4/sc-1.5.0/sl-1.2.6/datatables.min.js"></script>
 
-   <script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js" type="text/javascript"></script>
-   <script src="http://cdn.datatables.net/plug-ins/1.10.19/sorting/datetime-moment.js" type="text/javascript"></script>
+   {{-- <script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js" type="text/javascript"></script> --}}
+   {{-- <script src="http://cdn.datatables.net/plug-ins/1.10.19/sorting/datetime-moment.js" type="text/javascript"></script>
+ --}}
 
    <script>
 		$(document).ready(function(){
          
 			$("#tb_produtos").DataTable({
 				language : {
-					'url' : '{{ asset('js/portugues.json') }}',
-					"decimal": ",",
-					"thousands": "."
+					url : '{{ asset('js/portugues.json') }}',
+					
 				}, 
 				stateSave: true,
 				stateDuration: -1,
 				responsive : true,
+
+				"columnDefs": 
+				[
+					{
+						render: $.fn.dataTable.render.number( '.', ',', 2, 'R$ ' ),
+						targets: [3,4]
+					},
+				], 
+ 
             		  		
          });
          
