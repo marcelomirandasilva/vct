@@ -78,7 +78,8 @@ class ProdutoController extends Controller
 	public function edit(Produto $produto)
 	{
 
-		//dd($produto);
+		//dd($produto);//
+		
 		$parceiros = Parceiro::orderBy('nome')->get();
 		$unidades  = pegaValorEnum('produtos', 'unidade');
 		

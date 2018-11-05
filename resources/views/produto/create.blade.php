@@ -173,17 +173,18 @@
 @push("scripts")
 
 	{{-- Vanilla Masker --}}
-	{{-- <script src="{{asset('js/vanillaMasker.min.js')}}"></script>
-	<script src="{{asset('js/maskmoney/dist/jquery.maskMoney.min.js')}}" type="text/javascript"></script>
- --}}
-	<script src="{{asset('js/jQuery-Mask-Plugin/jquery.mask.min.js')}}" type="text/javascript"></script>
-
 	
+	<!-- <script src="{{asset('js/vanillaMasker.min.js')}}"></script> -->
+	<!-- <script src="{{asset('js/maskmoney/dist/jquery.maskMoney.min.js')}}" type="text/javascript"></script> -->
+
+	<script src="{{asset('js/inputmask/dist/jquery.inputmask.bundle.js')}}"></script>
+	
+
+ 
 	
 	<script>
 
 		if( {{ isset($produto) ? 'true' : 'false'  }}){
-			
 			
 			
 			let V1 = converteMoedaFloat(  $("input#valor_compra").val() );
@@ -203,9 +204,34 @@
 		
 	
 		$(document).ready(function(){
+
+			$("input#valor_compra").inputmask('decimal', {
+					radixPoint:",",
+					groupSeparator: ".",
+					autoGroup: true,
+					digits: 2,
+					digitsOptional: false,
+					placeholder: '0',
+					rightAlign: false,
+					onBeforeMask: function (value, opts) {
+					return value;
+					}
+			});
+
+			$("input#valor_venda").inputmask('decimal', {
+					radixPoint:",",
+					groupSeparator: ".",
+					autoGroup: true,
+					digits: 2,
+					digitsOptional: false,
+					placeholder: '0',
+					rightAlign: false,
+					onBeforeMask: function (value, opts) {
+					return value;
+					}
+			});
+
 			
-			$("#valor_compra").mask("#.##0,00", {reverse: true});
-			$("#valor_venda").mask("#.##0,00", {reverse: true});
 			
 /* 			//botão de cancelar
 			$("#btn_cancelar").click(function(){
@@ -213,7 +239,7 @@
 				window.history.back();
 	      }); */
 
-/* 			VMasker($(".money")).maskMoney({
+ 		/* 	VMasker($(".money")).maskMoney({
 				// Decimal precision -> "900"
 				precision: 2,
 				// Decimal separator -> ",90"
@@ -226,8 +252,8 @@
 				// masking decimals with ",00"
 				// Zero cents -> "R$ 1.234.567.890,00"
 				//zeroCents: true
-			});
- */
+			}); */
+
 
 			$("select#unidade").change(function() {
 				
@@ -357,7 +383,7 @@
 			});
 
 	
-			
+						
 
 
 			
