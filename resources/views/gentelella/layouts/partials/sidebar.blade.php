@@ -9,11 +9,10 @@
 			<li><a href="{{ url("/parceiro") }}">	<i class="fas fa-handshake"> </i> 			Parceiros</a>
 			<li><a href="{{ url("/produto")  }}">	<i class="fas fa-leaf"></i> 					Produtos</a>
 			<li><a href="{{ url("/cliente")  }}">	<i class="fas fa-hand-holding-heart"></i> Clientes</a>
+			<li><a href="{{ url("/venda")    }}">	<i class="fas fa-shopping-cart"></i> Vendas</a>
 
 			
 		</ul>	
 			
 	</div>
 </div>
-
-

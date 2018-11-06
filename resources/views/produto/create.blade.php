@@ -78,20 +78,19 @@
 						
 						<label class="control-label col-md-1 col-sm-1 col-xs-12 " for="valor_compra">V.Compra</label>
 						<div class="col-md-2 col-sm-2 col-xs-12">
-							<input type="text"  step="any" id="valor_compra" class="form-control " 
+							<input type="text"   id="valor_compra" class="form-control money" 
 								name="valor_compra"  
 								value="{{$produto->valor_compra or old('valor_compra')}}">
 						</div> 
-
 						<label class="control-label col-md-1 col-sm-1 col-xs-12 " for="valor_venda">V.Venda</label>
 						<div class="col-md-2 col-sm-2 col-xs-12">
-							<input type="text"  step="any" id="valor_venda" class="form-control " 
-								name="valor_venda"  
-								value="{{$produto->valor_venda or old('valor_venda')}}">
+							<input type="text"   id="valor_venda" class="form-control money" 
+							name="valor_venda"  
+							value="{{$produto->valor_venda or old('valor_venda')}}">
 						</div> 
-		
+						
 					</div>
-
+				
 					<div class="ln_solid"> </div>
 
 					<div class="form-group">
@@ -119,7 +118,7 @@
 							Valor de compra do Grama
 						</label>
 						<div class="col-md-2 col-sm-2 col-xs-12">
-							<input type="text" class="form-control money" id="compra_unidade" disabled 
+							<input type="text" id="compra_unidade" class="form-control " disabled 
 								value=" {{ $produto->valor_compra_unidade or old('valor_compra_unidade') }} ">
 						</div>
 
@@ -128,7 +127,7 @@
 							Valor de venda do Grama
 						</label>
 						<div class="col-md-2 col-sm-2 col-xs-12">
-							<input type="text" class="form-control" id="venda_unidade" disabled 
+							<input type="text"  id="venda_unidade" class="form-control " disabled 
 								value=" {{ $produto->valor_venda_unidade or old('valor_venda_unidade') }} ">
 								
 						</div>
@@ -174,62 +173,30 @@
 
 	{{-- Vanilla Masker --}}
 	
-	<!-- <script src="{{asset('js/vanillaMasker.min.js')}}"></script> -->
 	<!-- <script src="{{asset('js/maskmoney/dist/jquery.maskMoney.min.js')}}" type="text/javascript"></script> -->
-
-	<script src="{{asset('js/inputmask/dist/jquery.inputmask.bundle.js')}}"></script>
 	
-
- 
+	<script src="{{asset('js/vanillaMasker.min.js')}}"></script>
 	
 	<script>
 
 		if( {{ isset($produto) ? 'true' : 'false'  }}){
 			
 			
-			let V1 = converteMoedaFloat(  $("input#valor_compra").val() );
-			let V2 = converteMoedaFloat(  $("input#valor_venda").val());
+			let V1 =  converteMoedaFloat (  $("input#valor_compra").val() );
+			let V2 =  converteMoedaFloat (  $("input#valor_venda").val());
 			
 			diferenca_per = (( V2 - V1 ) / V1 * 100);
 			diferenca_rea = ( V2 - V1 ) ;
 
-			//$("input#dif_percentual").val( diferenca_per.toFixed(2) );				
 
 			$("input#dif_percentual").val(diferenca_per.toLocaleString('pt-br',{maximumFractionDigits: 2}) +" %");
 
 			$("input#dif_real").val(diferenca_rea.toLocaleString('pt-br',{style: 'currency', currency: 'BRL', maximumFractionDigits: 6}));
 
-			//parseFloat(salario.replace('R$ ', '').replace(".", "").replace(',', '.').replace(/_/g, ''));
 		}
 		
 	
 		$(document).ready(function(){
-
-			$("input#valor_compra").inputmask('decimal', {
-					radixPoint:",",
-					groupSeparator: ".",
-					autoGroup: true,
-					digits: 2,
-					digitsOptional: false,
-					placeholder: '0',
-					rightAlign: false,
-					onBeforeMask: function (value, opts) {
-					return value;
-					}
-			});
-
-			$("input#valor_venda").inputmask('decimal', {
-					radixPoint:",",
-					groupSeparator: ".",
-					autoGroup: true,
-					digits: 2,
-					digitsOptional: false,
-					placeholder: '0',
-					rightAlign: false,
-					onBeforeMask: function (value, opts) {
-					return value;
-					}
-			});
 
 			
 			
@@ -239,7 +206,7 @@
 				window.history.back();
 	      }); */
 
- 		/* 	VMasker($(".money")).maskMoney({
+ 			VMasker($(".money")).maskMoney({
 				// Decimal precision -> "900"
 				precision: 2,
 				// Decimal separator -> ",90"
@@ -252,7 +219,7 @@
 				// masking decimals with ",00"
 				// Zero cents -> "R$ 1.234.567.890,00"
 				//zeroCents: true
-			}); */
+			});
 
 
 			$("select#unidade").change(function() {
@@ -315,10 +282,11 @@
 			$("input#valor_compra").focusout(function() {
 				let divisor			= 1;
 				let unidade 		= $("select#unidade option:selected").val();
-				let valor_compra 	= parseInt(  $("input#valor_compra").val().replace(/[\D]+/g,'') ) / 100;
+				//let valor_compra 	= parseInt(  $("input#valor_compra").val().replace(/[\D]+/g,'') ) ;
+				let valor_compra 	= parseFloat( $("input#valor_compra").val().replace("R$ ", "").replace(",", ".") );
 				let qtd   			= $("input#quantidade").val();
 
-				let compra_unidade = valor_compra / qtd;
+				let compra = valor_compra / qtd;
 
 				switch (unidade) {
 					case 'kg':		divisor = 1000; 	break;
@@ -332,10 +300,14 @@
 					case 'maço':	divisor = 1; 		break;
 				}
 
-				let mostra = compra_unidade / divisor;
+
+				let compra_unidade = compra / divisor;
 				
-				$("input#compra_unidade").val(mostra.toLocaleString('pt-br',{style: 'currency', currency: 'BRL', maximumFractionDigits: 6}));
+				$("input#compra_unidade").val(compra_unidade.toLocaleString('pt-br',{style: 'currency', currency: 'BRL', maximumFractionDigits: 6}));
 				$("input#valor_compra_unidade").val(compra_unidade);
+
+				console.log("compra: ",compra);
+				console.log("compra unidade: ",compra_unidade);
 
 			});
 
@@ -348,8 +320,9 @@
 
 				let qtd   			= $("input#quantidade").val();
 
-				let venda_unidade = valor_venda / qtd;
-				console.log(valor_venda, qtd, venda_unidade);
+				let venda = valor_venda / qtd;
+
+
 
 				switch (unidade) {
 					case 'kg':		divisor = 1000; 	break;
@@ -363,8 +336,12 @@
 					case 'maço':	divisor = 1; 		break;
 				}
 
-				let mostra = venda_unidade / divisor;
-				$("input#venda_unidade").val(mostra.toLocaleString('pt-br',{style: 'currency', currency: 'BRL', maximumFractionDigits: 6}));
+				let venda_unidade = venda / divisor;
+
+				console.log("venda: ",venda);
+				console.log("venda unidade: ",venda_unidade);
+
+				$("input#venda_unidade").val(venda_unidade.toLocaleString('pt-br',{style: 'currency', currency: 'BRL', maximumFractionDigits: 6}));
 				
 
 				$("input#valor_venda_unidade").val(venda_unidade);

@@ -34,4 +34,5 @@ Route::resource('usuario',			      'UserController');
 Route::resource('parceiro',			   'ParceiroController');
 Route::resource('produto',			      'ProdutoController');
 Route::resource('cliente',			      'ClienteController');
+Route::resource('venda',			      'VendaController');
 
