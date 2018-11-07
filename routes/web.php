@@ -26,6 +26,8 @@ Route::get('/', 'HomeController@index')->name('home');
 //======================= Rotas para os graficos da dashboard       ====================
 Route::get('/dash/graf1/data',       'HomeController@graf1');
 
+//======================= Rotas para APIs       ====================
+Route::get('/buscaProduto/{produto}',	"ProdutoController@buscaProduto");
 
 //========================================================================================
 // 										RESOURCE

@@ -143,7 +143,14 @@ class ProdutoController extends Controller
 			DB::rollBack();
 			return response('erro', 500);
 		}
+	
+	}
 
+	public function buscaProduto($id)
+	{
+		$produto = Produto::with('parceiro')->find($id);
+
+		return response($produto);
 		
 	}
 }

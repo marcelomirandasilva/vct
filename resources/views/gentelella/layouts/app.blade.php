@@ -76,6 +76,11 @@
 		<!-- scripts -->
 		<script src="{{ asset('/js/app.js')}}"></script>
 		<script src="{{ asset('/js/components.js')}}"></script>
+		
+		
+		
+		{{-- <script src="{{ asset('/Smart-Wizard/js/jquery.smartWizard.js')}}"></script> --}}
+		<script src="{{ asset('js/jquery.smartWizard.js')}}"></script>
 
 		<script> 
 			//mensagens de sucesso

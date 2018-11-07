@@ -18,7 +18,10 @@
 
 	{{-- bootstrap-datetimepicker --}}
 	<link rel="stylesheet" href="{{ asset('/bootstrap-datetimepicker/bootstrap-datetimepicker.css') }}">      
-	
+  
+  
+  <link rel="stylesheet" href="{{ asset('/Smart-Wizard/styles/smart_wizard.css') }}">      
+  
 	
 	<link rel="stylesheet" href="{{ asset('/css/app.css') }}">      
   </head>
