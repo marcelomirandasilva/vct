@@ -20,7 +20,9 @@
 	<link rel="stylesheet" href="{{ asset('/bootstrap-datetimepicker/bootstrap-datetimepicker.css') }}">      
   
   
-  <link rel="stylesheet" href="{{ asset('/Smart-Wizard/styles/smart_wizard.css') }}">      
+  {{-- <link rel="stylesheet" href="{{ asset('/SmartWizard/dist/css/smart_wizard.css') }}">       --}}
+  <link rel="stylesheet" href="{{ asset('/SmartWizard/dist/css/smart_wizard_theme_arrows.css') }}">      
+  
   
 	
 	<link rel="stylesheet" href="{{ asset('/css/app.css') }}">      

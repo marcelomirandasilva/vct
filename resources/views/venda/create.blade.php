@@ -21,126 +21,49 @@
 				
 					{{csrf_field()}}
 
-				
-					<div id="wizard" class="form_wizard wizard_horizontal">
-					  <ul class="wizard_steps">
-						 	<li>
-								<a href="#step-1">
-							  		<span class="step_no">1</span>
-							  		<span class="step_descr"> Escolha o Cliente </span>
-								</a>
-						 	</li>
-						 	<li>
-								<a href="#step-2">
-							  		<span class="step_no">2</span>
-							  		<span class="step_descr"> Adicione os produtos</span>
-								</a>
-						 	</li>
-						 	<li>
-								<a href="#step-3">
-								  <span class="step_no">3</span>
-								  <span class="step_descr">Entrega</span>
-								</a>
-							</li>
-						 	<li>
-								<a href="#step-4">
-							  		<span class="step_no">4</span>
-							  		<span class="step_descr">Pagamento</span>
-								</a>
-						 	</li>
-					  	</ul>
-						<div id="step-1">
-							<br>
-							<div class="form-group">
-								<label class="control-label col-md-1 col-sm-1 col-xs-12" for="cliente_id"> Cliente </label>
-								<div class="col-md-5 col-sm-5 col-xs-12">
-									<select name="cliente_id" id="cliente_id" class="form-control col-md-1" autofocus>
-										@if (isset($venda)) <!-- variavel para verificar se foi chamado pela edição -->
-											@foreach($clientes as $cliente)
-												@if ( $venda->cliente == $cliente)
-													<option value="{{$cliente->id}}" selected="selected">{{$cliente->nome}} </option>
-												@else
-													<option value="{{$cliente->id}}">{{$cliente->nome}} </option>  
-												@endif
-											@endforeach
-										@else
-											@foreach($clientes as $cliente)
-												<option value="{{$cliente->id}}"> {{$cliente->nome}}  </option>    
-											@endforeach
-										@endif
-									</select>
-								</div>
-							</div>
-					  </div>
-					  <div id="step-2">
-							<div class="form-group">
-								<div class="col-md-5 col-sm-5 col-xs-12 ">
-									<label class="control-label col-md-1 col-sm-1 col-xs-12" for="produto"> Produto </label>
-									<select name="produto" id="produto" class="form-control col-md-1" >
-										<option value=""> Selecione... </option>
-										@foreach($produtos as $produto)
-											<option value="{{$produto->id}}">{{$produto->nome}} </option>  
-										@endforeach
-									</select>
-								</div>
-								
-								<div class="col-md-7 col-sm-7 col-xs-12 ">
-									<table class="table table-striped table-bordered compact" id="tb_produto">
-										<thead>
-											<tr>
-												<th>Parceiro</th>
-												<th>Quantidade</th>
-												<th>Unidade</th>
-												<th>Venda</th>
-												<th>Venda (g/ml/u)</th>
-											</tr>						
-										</thead>
-										<tbody>
-										</tbody>
-									</table>
-								</div>
-							</div>
-	
-							<div class="form-group">
-							
-								<div class="col-md-2 col-sm-2 col-xs-12">
-									<label class="control-label col-md-1 col-sm-1 col-xs-12" for="unidade"> Unidade </label>
-									<select name="unidade" id="unidade" class="form-control col-md-1" >
-										@foreach($unidades as $unidade)
-											<option value="{{$unidade}}"> {{$unidade}} </option>    
-										@endforeach
-									</select>
-								</div>
-								<div class="col-md-2 col-sm-2 col-xs-12">
-									<label class="control-label col-md-1 col-sm-1 col-xs-12" for="quantidade">Quantidade</label>
-									<input type="number" id="quantidade" class="form-control" name="quantidade" 
-									value="{{$produto->quantidade or old('quantidade')}}">
-								</div>
-			
-								<div class="col-md-2 col-sm-2 col-xs-12">
-									<label class="control-label " >Valor Unitário</label>
-									<input type="number" id="v_unitario" class="form-control" name="quantidade" 
-									value="{{$produto->valor_venda}}">
-								</div>
-								
-	
-								<div class="col-md-2 col-sm-2 col-xs-12">
-									<label class="control-label col-md-1 col-sm-1 col-xs-12" >V. Unitário</label>
-									<input type="number" id="v_unitario" class="form-control" name="quantidade" 
-									value="{{$produto->valor_venda}}">
-								</div>
-							</div>
+					<div id="smartwizard">
+						<ul>
+							<li><a href="#step-1"><span class="step_no">1</span><span class="step_descr"> Escolha o Cliente </span></a></li>
+							<li><a href="#step-2"><span class="step_no">2</span><span class="step_descr"> Adicione os produtos</span></a></li>
+							<li><a href="#step-3"><span class="step_no">3</span><span class="step_descr"> Entrega</span></a></li>
+							<li><a href="#step-4"><span class="step_no">4</span><span class="step_descr"> Pagamento</span></a></li>
+						</ul>
+					  
+						<div>
+							<div id="step-1" class="">
+								<br>
+								<div class="form-group">
+									<label class="control-label col-md-1 col-sm-1 col-xs-12" for="cliente_id"> Cliente </label>
+									<div class="col-md-5 col-sm-5 col-xs-12">
+										<select name="cliente_id" id="cliente_id" class="form-control col-md-1" autofocus>
+											<option value=""> Selecione... </option>
 
-							<div class="form-group">
+											@if (isset($venda)) <!-- variavel para verificar se foi chamado pela edição -->
+												@foreach($clientes as $cliente)
+													@if ( $venda->cliente == $cliente)
+														<option value="{{$cliente->id}}" selected="selected">{{$cliente->nome}} </option>
+													@else
+														<option value="{{$cliente->id}}">{{$cliente->nome}} </option>  
+													@endif
+												@endforeach
+											@else
+												@foreach($clientes as $cliente)
+													<option value="{{$cliente->id}}"> {{$cliente->nome}}  </option>    
+												@endforeach
+											@endif
+										</select>
+									</div>
+								</div>
+
 								<div class="col-md-12 col-sm-12 col-xs-12 ">
-									<table class="table table-striped table-bordered compact" id="tb_produto">
+									<table class="table table-striped table-bordered compact col-md-12 col-sm-12 col-xs-12 " id="tb_cliente">
 										<thead>
 											<tr>
-												<th>Parceiro</th>
-												<th>Quantidade</th>
-												<th>Unidade</th>
-												<th>Venda</th>
-												<th>Venda (g/ml/u)</th>
+												<th>Telefone </th>
+												<th>Email</th>
+												<th>Nascimento</th>
+												<th>Endereço</th>
+												<th>Municipio</th>
 											</tr>						
 										</thead>
 										<tbody>
@@ -148,30 +71,118 @@
 									</table>
 								</div>
 							</div>
-					  </div>
+							<div id="step-2" class="">
+								<br>
+								<div class="form-group">
+									<div class="col-md-5 col-sm-5 col-xs-12 ">
+										<label class="control-label col-md-1 col-sm-1 col-xs-12" for="produto"> Produto </label>
+										<select name="produto" id="produto" class="form-control col-md-1" >
+											<option value=""> Selecione... </option>
+											@foreach($produtos as $produto)
+												<option value="{{$produto->id}}">{{$produto->nome}} </option>  
+											@endforeach
+										</select>
+									</div>
+										
+									<div class="col-md-7 col-sm-7 col-xs-12 ">
+										<table class="table table-striped table-bordered compact col-md-12 col-sm-12 col-xs-12" id="tb_produto">
+											<thead>
+												<tr>
+													<th>Parceiro</th>
+													<th>Quantidade</th>
+													<th>Unidade</th>
+													<th>Venda</th>
+													<th>Venda (g/ml/u)</th>
+												</tr>						
+											</thead>
+											<tbody>
+											</tbody>
+										</table>
+									</div>
+								</div>
 
-					  <div id="step-3">
+								<div class="ln_solid"> </div>
+							
+								<div class="form-group">
+									<div class="col-md-2 col-sm-2 col-xs-12">
+										<label class="control-label col-md-1 col-sm-1 col-xs-12" for="unidade"> Unidade </label>
+										<select name="unidade" id="unidade" class="form-control col-md-1" >
+											{{-- @foreach($unidades as $unidade)
+												<option value="{{$unidade}}"> {{$unidade}} </option>    
+											@endforeach --}}
+										</select>
+									</div>
+									<div class="col-md-2 col-sm-2 col-xs-12">
+										<label class="control-label col-md-1 col-sm-1 col-xs-12" for="quantidade">Quantidade</label>
+										<input type="number" id="quantidade" class="form-control" name="quantidade" 
+										value="0">
+									</div>
+						
+									<div class="col-md-2 col-sm-2 col-xs-12">
+										<label class="control-label " >Valor Unitário</label>
+										<input type="number" id="v_unitario" class="form-control" name="quantidade" 
+										value="0">
+									</div>
+						
+									<div class="col-md-2 col-sm-2 col-xs-12">
+										<label class="control-label " >V. Unitário</label>
+										<input type="number" id="v_unitario" class="form-control" name="quantidade" 
+										value="0">
+									</div>
+								</div>
 
+								<div class="ln_solid"> </div>
+						
+								<div class="form-group">
+									<div class="col-md-12 col-sm-12 col-xs-12 ">
+										<table class="table table-striped table-bordered compact" id="tb_produto">
+											<thead>
+												<tr>
+													<th>Parceiro</th>
+													<th>Quantidade</th>
+													<th>Unidade</th>
+													<th>Venda</th>
+													<th>Venda (g/ml/u)</th>
+												</tr>						
+											</thead>
+											<tbody>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+							
+							<div id="step-3" class="">
+								Step Content3
+							</div>
+							<div id="step-4" class="">
+								Step Content4
+							</div>
 						</div>
-
-					  <div id="step-4">
-
-					  </div>
-
 					</div>
-	
-				
-					
-				
 
+					{{-- BOTÕES --}}
+					<div class="ln_solid"> </div>
+					<div class="footer text-center"> {{-- col-md-3 col-md-offset-9 --}}
+						<button type="button" id="btn_cancelar" 
+							onclick="window.location='{{ URL::previous() }}'"
+							class="botoes-acao btn btn-round btn-primary" >
+
+							<span class="icone-botoes-acao mdi mdi-backburger"></span>   
+							<span class="texto-botoes-acao"> CANCELAR </span>
+						</button>
+					
+						<button type="submit" id="btn_salvar" class="botoes-acao btn btn-round btn-success ">
+							<span class="icone-botoes-acao mdi mdi-send"></span>
+							<span class="texto-botoes-acao"> SALVAR </span>
+						</button>
+					</div>
 						
-						
-						
-					</form>
-				</div>
+				</form>
 			</div>
 		</div>
 	</div>
+	
 @endsection
 
 @push("scripts")
@@ -194,52 +205,146 @@
 		$(document).ready(function(){
 
 			
-			$('#wizard').smartWizard({
+			$('#smartwizard').smartWizard({
+				selected: 0,
+				theme: 'arrows',
+				autoAdjustHeight: false,
+				lang: {  // Language variables
+					next: 'Próximo',
+					previous:'Anterior',
+				},
+				/* toolbarSettings: {
+					toolbarExtraButtons: [
+						$('<button></button>').text('Cancelar').addClass('botoes-acao btn btn-round btn-primary').on('click', function(){ 
+							alert('Cancel button click');                            
+						}),
 
-				labelNext: 'Próximo',
-				labelPrevious:'Anterior',
-				labelFinish:'Finalizar', 
+						$('<button></button>').text('Salvar').addClass('botoes-acao btn btn-round btn-success').on('click', function(){ 
+							alert('Finsih button click');                            
+						}),
+					]
+				}, */
+				
 			});
-			
+
 			
 			$("#tb_produto").DataTable({
-				language : {
-					'url' : '{{ asset('js/portugues.json') }}',
-					"decimal": ",",
-					"thousands": "."
-				}, 
-				"paging":   false,
-				"ordering": false,
-				"info":     false,
-				"searching":false,
-				responsive: true
-            		  		
+				language : {'url' : '{{ asset('js/portugues.json') }}',"decimal": ",","thousands": "."}, 
+				"paging": false,"ordering": false,"info": false,"searching":false, responsive: true
+			});
+			
+			$("#tb_cliente").DataTable({
+				language : {'url' : '{{ asset('js/portugues.json') }}',"decimal": ",","thousands": "."}, 
+				"paging": false,"ordering": false,"info": false,"searching":false, responsive: true
          });
 
-			$("select#produto").change(function() {
+
+			/*  select de CLIENTES */
+			$("select#cliente_id").change(function() {
+				$v_cliente = $("select#cliente_id option:selected").val();
+				$("#tb_cliente").DataTable().row().remove().draw();
+				console.log($v_cliente);
 				
-				$v_produto = $("select#produto option:selected").val();
-				$("#tb_produto").DataTable().row().remove().draw();
-				console.log($v_produto);
+				$.get(url_base+'/buscaCliente/'+$("select#cliente_id option:selected").val(), function(resposta){
 
-				
-				$.get(url_base+'/buscaProduto/'+$("select#produto option:selected").val(), function(resposta){
-					console.log(resposta);
-					
+					console.log( resposta['telefone1'].length );
 
-					$("#tb_produto").DataTable().row.add( [
-							resposta['parceiro']['nome'],
-							resposta['quantidade'],
-							resposta['unidade'],
-							resposta['valor_venda'],
-							resposta['valor_venda_unidade'],
-							
+					$("#tb_cliente").DataTable().row.add( [
 
+						telefone(resposta['telefone1']),
+						resposta['email'],
+						resposta['nascimento'],
+						resposta['logradouro'] + ' - Nº ' + resposta['numero'],
+						resposta['municipio'], 
 					] ).draw( false );
 				});
 		
   			})
 
+
+			/*  select de PRODUTOS */
+			$("select#produto").change(function() {
+				v_produto = $("select#produto option:selected").val();
+				$("#tb_produto").DataTable().row().remove().draw();
+				console.log(v_produto);
+				
+
+				$.get(url_base+'/buscaProduto/'+$("select#produto option:selected").val(), function(resposta){
+					
+
+					$("#tb_produto").DataTable().row.add( [
+						resposta['parceiro']['nome'],
+						resposta['quantidade'],
+						resposta['unidade'],
+						resposta['valor_venda'],
+						resposta['valor_venda_unidade'],
+					] ).draw( false );
+					
+					//remove as options dentro do select
+					$('#unidade option').remove();
+					//adiciona o 1º valor
+					$('#unidade').append('<option value="">Selecione...</option>');
+
+					// 'g','kg','ml','l','un','maço','cx','dz','1/2 dz'
+
+					//adiciona no select de unidade as unidades que podem ser utilizadas de acordo com o produto selecionado
+					switch ( resposta['unidade'] ) {
+						case 'g':
+							$('#unidade').append('<option value="g">g</option>');
+							break;
+
+						case 'kg':
+							$('#unidade').append('<option value="g">g</option>');
+							$('#unidade').append('<option value="kg">kg</option>');
+							break;
+					
+						case 'ml':
+							$('#unidade').append('<option value="ml">ml</option>');
+							break;
+
+						case 'l':
+							$('#unidade').append('<option value="ml">ml</option>');
+							$('#unidade').append('<option value="l">l</option>');
+							break;
+						
+						case 'un':
+							$('#unidade').append('<option value="un">un</option>');
+							$('#unidade').append('<option value="1/2 dz">1/2 dz</option>');
+							$('#unidade').append('<option value="dz">dz</option>');
+							break;
+						
+						case 'cx': $('#unidade').append('<option value="cx">cx</option>'); break;
+						case 'maço': $('#unidade').append('<option value="maço">maço</option>'); break;
+
+						case 'dz':
+							$('#unidade').append('<option value="un">un</option>');
+							$('#unidade').append('<option value="1/2 dz">1/2 dz</option>');
+							$('#unidade').append('<option value="dz">dz</option>');
+							break;
+						
+						case '1/2 dz':
+							$('#unidade').append('<option value="un">un</option>');
+							$('#unidade').append('<option value="1/2 dz">1/2 dz</option>');
+							$('#unidade').append('<option value="dz">dz</option>');
+							break;
+
+						default:
+							console.log("não entrou")	;
+						break;
+					}
+
+				});
+
+
+		
+  			})
+
+
+			/*  select de UNIDADE */
+			$("select#unidade").change(function() {
+				v_unidade = $("select#unidade option:selected").val();
+				console.log(v_unidade);
+			});
 
 
 			//botão de cancelar
@@ -250,6 +355,36 @@
 
 			
 		});
+
+
+		function telefone(v){
+			
+			
+
+			v1 = v;
+			tam = v1.length;
+			
+			if (tam == 13) { // COM CÓDIGO DE ÁREA NACIONAL E DO PAIS e 9 dígitos
+				v = v.replace(/(\d{2})(\d{2})(\d{5})(\d{4})/, "+$1 ($2) $3-$4");
+			}
+			if (tam == 12) { // COM CÓDIGO DE ÁREA NACIONAL E DO PAIS
+				v = v.replace(/(\d{2})(\d{2})(\d{4})(\d{4})/, "+$1 ($2) $3-$4");
+			}
+			if (tam == 11) { // COM CÓDIGO DE ÁREA NACIONAL e 9 dígitos
+				v = v.replace(/(\d{2})(\d{5})(\d{4})/, "($1) $2-$3");
+			}
+			if (tam == 10) { // COM CÓDIGO DE ÁREA NACIONAL
+				v = v.replace(/(\d{2})(\d{4})(\d{4})/, "($1) $2-$3");
+			}
+			
+			if (tam <= 9) { // SEM CÓDIGO DE ÁREA
+				v = v.replace(/(\d{5})(\d{4})/, "$1-$2");
+			}
+		
+
+
+			return v
+		}
 	</script>
 
 @endpush

@@ -138,7 +138,13 @@ class ClienteController extends Controller
 			DB::rollBack();
 			return response('erro', 500);
 		}
+	}
 
+	public function buscaCliente($id)
+	{
+		$cliente = Cliente::with('banco')->find($id);
+
+		return response($cliente);
 		
 	}
 }

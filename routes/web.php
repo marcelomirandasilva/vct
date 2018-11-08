@@ -28,6 +28,7 @@ Route::get('/dash/graf1/data',       'HomeController@graf1');
 
 //======================= Rotas para APIs       ====================
 Route::get('/buscaProduto/{produto}',	"ProdutoController@buscaProduto");
+Route::get('/buscaCliente/{cliente}',	"ClienteController@buscaCliente");
 
 //========================================================================================
 // 										RESOURCE

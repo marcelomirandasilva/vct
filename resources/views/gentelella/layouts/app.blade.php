@@ -79,9 +79,8 @@
 		
 		
 		
-		{{-- <script src="{{ asset('/Smart-Wizard/js/jquery.smartWizard.js')}}"></script> --}}
-		<script src="{{ asset('js/jquery.smartWizard.js')}}"></script>
-
+		<script src="{{ asset('/SmartWizard/dist/js/jquery.smartWizard.min.js')}}"></script>
+		
 		<script> 
 			//mensagens de sucesso
 			@if (session('sucesso'))
