@@ -119,16 +119,19 @@
 									</div>
 						
 									<div class="col-md-2 col-sm-2 col-xs-12">
-										<label class="control-label " >Valor Unitário</label>
-										<input type="number" id="v_unitario" class="form-control" name="quantidade" 
-										value="0">
+										<label class="control-label " >Valor Venda</label>
+										<input type="text" id="v_venda" class="form-control" name="v_venda" value="0" disabled>
+									</div>
+
+									<div class="col-md-2 col-sm-2 col-xs-12">
+										<button type="" id="btn_inserir" class="botoes-acao btn btn-round btn-success"
+										style="margin-top: 27px;margin-bottom: 0px;">
+											<span class="icone-botoes-acao mdi mdi-send"></span>
+											<span class="texto-botoes-acao"> INSERIR </span>
+										</button>
 									</div>
 						
-									<div class="col-md-2 col-sm-2 col-xs-12">
-										<label class="control-label " >V. Unitário</label>
-										<input type="number" id="v_unitario" class="form-control" name="quantidade" 
-										value="0">
-									</div>
+								
 								</div>
 
 								<div class="ln_solid"> </div>
@@ -204,7 +207,9 @@
 	
 		$(document).ready(function(){
 
-			
+			let produto_selecionado;
+			let cliente_selecionado;
+
 			$('#smartwizard').smartWizard({
 				selected: 0,
 				theme: 'arrows',
@@ -243,11 +248,10 @@
 			$("select#cliente_id").change(function() {
 				$v_cliente = $("select#cliente_id option:selected").val();
 				$("#tb_cliente").DataTable().row().remove().draw();
-				console.log($v_cliente);
 				
 				$.get(url_base+'/buscaCliente/'+$("select#cliente_id option:selected").val(), function(resposta){
-
-					console.log( resposta['telefone1'].length );
+					//coloca o cliente selecionado na variável global
+					cliente_selecionado = resposta;
 
 					$("#tb_cliente").DataTable().row.add( [
 
@@ -266,11 +270,11 @@
 			$("select#produto").change(function() {
 				v_produto = $("select#produto option:selected").val();
 				$("#tb_produto").DataTable().row().remove().draw();
-				console.log(v_produto);
-				
 
 				$.get(url_base+'/buscaProduto/'+$("select#produto option:selected").val(), function(resposta){
-					
+
+					//coloca o produto selecionado na variável global
+					produto_selecionado = resposta;
 
 					$("#tb_produto").DataTable().row.add( [
 						resposta['parceiro']['nome'],
@@ -345,6 +349,65 @@
 				v_unidade = $("select#unidade option:selected").val();
 				console.log(v_unidade);
 			});
+
+			$("input#quantidade").focusout(function() {
+
+				console.log(cliente_selecionado);
+				console.log(produto_selecionado);
+
+				let venda				= 0;
+				let divisor				= 1;
+				let unidade 			= $("select#unidade option:selected").val();
+				let qtd   				= $("input#quantidade").val();
+				let valor_produto 	= produto_selecionado['valor_venda'];
+
+				console.log('valor_produto', valor_produto);
+
+				switch ( produto_selecionado['unidade'] ) {
+					case 'g': 		if (unidade == 'kg')	{ divisor = 1 		; }; 	break;
+					case 'kg':		if (unidade == 'g')	{ divisor = 1000 	; };	break;
+					case 'ml': 		break;
+					case 'l': 		break;
+					case 'un':		break;
+					case 'cx': 		break;
+					case 'maço': 	break;
+					case 'dz':		break;
+					case '1/2 dz':	break;
+				}
+
+				venda = ( valor_produto / divisor)    * qtd ;
+
+				console.log('venda',venda);
+				
+				$("input#v_venda").val(venda);
+
+				//let v_venda 		= parseFloat( $("input#valor_venda").val().replace("R$ ", "").replace(",", ".") );
+
+
+
+			});
+
+
+			$("#btn_inserir").click(function() {
+				/* $v_cliente = $("select#cliente_id option:selected").val();
+				$("#tb_cliente").DataTable().row().remove().draw();
+				console.log($v_cliente);
+				
+				$.get(url_base+'/buscaCliente/'+$("select#cliente_id option:selected").val(), function(resposta){
+
+					console.log( resposta['telefone1'].length );
+
+					$("#tb_cliente").DataTable().row.add( [
+
+						telefone(resposta['telefone1']),
+						resposta['email'],
+						resposta['nascimento'],
+						resposta['logradouro'] + ' - Nº ' + resposta['numero'],
+						resposta['municipio'], 
+					] ).draw( false );
+				}); */
+		
+  			})
 
 
 			//botão de cancelar
