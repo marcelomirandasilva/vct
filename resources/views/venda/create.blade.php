@@ -138,7 +138,7 @@
 						
 								<div class="form-group">
 									<div class="col-md-12 col-sm-12 col-xs-12 ">
-										<table class="table table-striped table-bordered compact" id="tb_produto">
+										<table class="table table-striped table-bordered compact" id="tb_venda">
 											<thead>
 												<tr>
 													<th>Parceiro</th>
@@ -205,6 +205,8 @@
 	
 	<script>
 	
+		let tabela_venda = [];
+
 		$(document).ready(function(){
 
 			let produto_selecionado;
@@ -239,6 +241,11 @@
 			});
 			
 			$("#tb_cliente").DataTable({
+				language : {'url' : '{{ asset('js/portugues.json') }}',"decimal": ",","thousands": "."}, 
+				"paging": false,"ordering": false,"info": false,"searching":false, responsive: true
+         });
+
+			$("#tb_venda").DataTable({
 				language : {'url' : '{{ asset('js/portugues.json') }}',"decimal": ",","thousands": "."}, 
 				"paging": false,"ordering": false,"info": false,"searching":false, responsive: true
          });
@@ -294,41 +301,41 @@
 					//adiciona no select de unidade as unidades que podem ser utilizadas de acordo com o produto selecionado
 					switch ( resposta['unidade'] ) {
 						case 'g':
-							$('#unidade').append('<option value="g">g</option>');
+							$('#unidade').append('<option value="g" selected>g</option>');
 							break;
 
 						case 'kg':
 							$('#unidade').append('<option value="g">g</option>');
-							$('#unidade').append('<option value="kg">kg</option>');
+							$('#unidade').append('<option value="kg" selected>kg</option>');
 							break;
 					
 						case 'ml':
-							$('#unidade').append('<option value="ml">ml</option>');
+							$('#unidade').append('<option value="ml" selected>ml</option>');
 							break;
 
 						case 'l':
 							$('#unidade').append('<option value="ml">ml</option>');
-							$('#unidade').append('<option value="l">l</option>');
+							$('#unidade').append('<option value="l" selected>l</option>');
 							break;
 						
 						case 'un':
-							$('#unidade').append('<option value="un">un</option>');
+							$('#unidade').append('<option value="un" selected>un</option>');
 							$('#unidade').append('<option value="1/2 dz">1/2 dz</option>');
 							$('#unidade').append('<option value="dz">dz</option>');
 							break;
 						
-						case 'cx': $('#unidade').append('<option value="cx">cx</option>'); break;
-						case 'maço': $('#unidade').append('<option value="maço">maço</option>'); break;
+						case 'cx': $('#unidade').append('<option value="cx" selected>cx</option>'); break;
+						case 'maço': $('#unidade').append('<option value="maço" selected>maço</option>'); break;
 
 						case 'dz':
 							$('#unidade').append('<option value="un">un</option>');
 							$('#unidade').append('<option value="1/2 dz">1/2 dz</option>');
-							$('#unidade').append('<option value="dz">dz</option>');
+							$('#unidade').append('<option value="dz" selected>dz</option>');
 							break;
 						
 						case '1/2 dz':
 							$('#unidade').append('<option value="un">un</option>');
-							$('#unidade').append('<option value="1/2 dz">1/2 dz</option>');
+							$('#unidade').append('<option value="1/2 dz" selected>1/2 dz</option>');
 							$('#unidade').append('<option value="dz">dz</option>');
 							break;
 
@@ -355,8 +362,7 @@
 				console.log(cliente_selecionado);
 				console.log(produto_selecionado);
 
-				let venda				= 0;
-				let divisor				= 1;
+				var venda				= 0;
 				let unidade 			= $("select#unidade option:selected").val();
 				let qtd   				= $("input#quantidade").val();
 				let valor_produto 	= produto_selecionado['valor_venda'];
@@ -364,18 +370,66 @@
 				console.log('valor_produto', valor_produto);
 
 				switch ( produto_selecionado['unidade'] ) {
-					case 'g': 		if (unidade == 'kg')	{ divisor = 1 		; }; 	break;
-					case 'kg':		if (unidade == 'g')	{ divisor = 1000 	; };	break;
-					case 'ml': 		break;
-					case 'l': 		break;
-					case 'un':		break;
-					case 'cx': 		break;
-					case 'maço': 	break;
-					case 'dz':		break;
-					case '1/2 dz':	break;
+					case 'g': 		if (unidade == 'g')	{ 
+											venda = ( valor_produto / 1) 		* qtd ; 
+										}; 	
+										break;
+
+					case 'kg':		if (unidade == 'g')	{ 
+											venda = ( valor_produto / 1000)   * qtd ; 
+										} else if (unidade == 'kg')	{ 
+											venda = ( valor_produto / 1)   * qtd ; 
+										};	
+										break;
+
+
+					case 'ml': 		if (unidade == 'l')	{ 
+											venda = ( valor_produto / 1000)   * qtd ; 
+										} else if (unidade == 'ml')	{ 
+											venda = ( valor_produto / 1)   * qtd ; 
+										};	
+										break;
+
+					case 'l': 		if (unidade == 'ml')	{ 
+											venda = ( valor_produto / 1) 		* qtd ; 
+										} else if (unidade == 'l')	{ 
+											venda = ( valor_produto / 1)   * qtd ; 
+										};	
+										break;
+
+					case 'un':		if (unidade == 'un')	{ 
+											venda = ( valor_produto / 1)   * qtd ; 
+										}else if (unidade == '1/2 dz')	{
+											venda = ( valor_produto * 6)   * qtd ;
+										}else if (unidade == 'dz')	{
+											venda = ( valor_produto * 12)   * qtd ;
+										};	
+										break;
+
+					
+					case '1/2 dz':	if (unidade == '1/2 dz')	{ 
+											venda = ( valor_produto / 1)   * qtd ; 
+										}else if (unidade == 'un')	{
+											venda = ( valor_produto / 6)   * qtd ;
+										}else if (unidade == 'dz')	{
+											venda = ( valor_produto * 2)   * qtd ;
+										};	
+										break;
+
+					case 'dz':		if (unidade == 'dz')	{ 
+											venda = ( valor_produto / 1)   * qtd ; 
+										}else if (unidade == 'un')	{
+											venda = ( valor_produto / 12)   * qtd ;
+										}else if (unidade == '1/2 dz')	{
+											venda = ( valor_produto / 2)   * qtd ;
+										};	
+										break;
+					
+					case 'cx': 		if (unidade == 'cx')	{ venda = ( valor_produto / 1) 		* qtd ; }; 	break;
+					case 'maço': 	if (unidade == 'maço')	{ venda = ( valor_produto / 1) 		* qtd ; }; 	break;
 				}
 
-				venda = ( valor_produto / divisor)    * qtd ;
+				
 
 				console.log('venda',venda);
 				
@@ -389,23 +443,30 @@
 
 
 			$("#btn_inserir").click(function() {
-				/* $v_cliente = $("select#cliente_id option:selected").val();
-				$("#tb_cliente").DataTable().row().remove().draw();
-				console.log($v_cliente);
-				
-				$.get(url_base+'/buscaCliente/'+$("select#cliente_id option:selected").val(), function(resposta){
+				event.preventDefault();
 
-					console.log( resposta['telefone1'].length );
+				v_parceiro_id		= produto_selecionado['parceiro']['id'],
+				v_parceiro_nome	= produto_selecionado['parceiro']['nome'],
 
-					$("#tb_cliente").DataTable().row.add( [
+				v_produto_id		= produto_selecionado['id'],
+				v_produto_nome		= produto_selecionado['nome'],
 
-						telefone(resposta['telefone1']),
-						resposta['email'],
-						resposta['nascimento'],
-						resposta['logradouro'] + ' - Nº ' + resposta['numero'],
-						resposta['municipio'], 
-					] ).draw( false );
-				}); */
+				v_unidade 			= $("select#unidade option:selected").val();
+				v_quantidade 		= $("input#quantidade").val();
+				v_venda 				= $("input#v_venda").val();
+
+
+				//tabela_venda.push(v_produto);
+			
+
+				$("#tb_venda").DataTable().row.add( [
+
+					v_parceiro_nome,
+					v_produto_nome,
+					v_unidade,
+					v_quantidade,
+					v_venda,
+				] ).draw( false );
 		
   			})
 

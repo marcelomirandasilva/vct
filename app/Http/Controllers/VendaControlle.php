@@ -52,7 +52,7 @@ class VendaController extends Controller
 		$request->merge(['valor_venda'  => 
 		str_replace('R$ ', '', str_replace(',', '.', str_replace('.', '', $request->valor_venda))) ]);
 		
-		//dd($request->all());
+		dd($request->all());
 
 		//inicia sessão de banco
 		DB::beginTransaction();
