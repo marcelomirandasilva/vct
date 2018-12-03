@@ -156,7 +156,70 @@
 							</div>
 							
 							<div id="step-3" class="">
-								Step Content3
+								
+								<br>
+
+								<div class="form-group">
+									<label class="control-label col-md-1 col-sm-1 col-xs-12 " for="pais">Pais</label>
+									<div class="col-md-2 col-sm-2 col-xs-12">
+										<input type="text" id="pais" class="form-control" name="pais" 
+										value="{{$venda->pais or old('pais')}}">
+									</div> 
+					
+									<label class="control-label col-md-1 col-sm-1 col-xs-12" for="cep">CEP</label>
+									<div class="col-md-2 col-sm-2 col-xs-12">
+										<input id="cep" name="cep" type="text" placeholder="99.999-999" class="form-control input-md cep" 
+											value="{{$venda->cep or old('cep')}}" >
+									</div>
+									<label class="control-label col-md-1 col-sm-1 col-xs-12" for="uf">UF</label>
+									<div class="col-md-1 col-sm-1 col-xs-12">
+										<input id="uf" name="uf" type="text"  class="form-control input-md uf"
+											value="{{$venda->uf or old('uf')}}" >
+									</div>
+									<label class="control-label col-md-1 col-sm-1 col-xs-12" for="municipio">Município</label>
+									<div class="col-md-3 col-sm-3 col-xs-12">
+										<input id="municipio" name="municipio" type="text" class="form-control input-md" 
+											value="{{$venda->municipio or old('municipio')}}" >
+									</div>
+								</div>
+
+								<div class="item form-group">
+				
+									<label class="control-label col-md-1 col-sm-1 col-xs-12" for="bairro">Bairro</label>
+									<div class="col-md-3 col-sm-3 col-xs-12">
+										<input id="bairro" name="bairro" type="text" placeholder="Centro" class="form-control input-md"
+												value="{{$venda->bairro or old('bairro')}}" >
+									</div>
+									<label class="control-label col-md-1 col-sm-1 col-xs-12" for="logradouro">Logradouro</label>
+									<div class="col-md-4 col-sm-4 col-xs-12">
+										<input id="logradouro" name="logradouro" type="text" placeholder="Av, Rua, Travessa..." class="form-control input-md"
+											value="{{$venda->logradouro or old('logradouro')}}" >
+									</div>
+									<label class="control-label col-md-1 col-sm-1 col-xs-12" for="numero">Numero</label>
+									<div class="col-md-2 col-sm-2 col-xs-12">
+										<input id="numero" name="numero" type="text" placeholder="999" class="form-control input-md"
+											value="{{$venda->numero or old('numero')}}" >
+									</div>
+								</div>
+								<div class="item form-group">
+									<label class="control-label col-md-1 col-sm-1 col-xs-12" for="complemento">Complemento</label>
+									<div class="col-md-2 col-sm-2 col-xs-12">
+										<input id="complemento" name="complemento" type="text" placeholder="999" class="form-control input-md"
+											value="{{$venda->complemento or old('complemento')}}" >
+									</div>
+
+									<label class="control-label col-md-2 col-sm-2 col-xs-12" for="referencia">Ponto de referência</label>
+									<div class="col-md-7 col-sm-7 col-xs-12">
+										<input id="referencia" name="referencia" type="text" placeholder="999" class="form-control input-md"
+											value="{{$venda->referencia or old('referencia')}}" >
+									</div>
+								</div>
+
+								
+
+
+
+
 							</div>
 							<div id="step-4" class="">
 								Step Content4
@@ -260,7 +323,20 @@
 					//coloca o cliente selecionado na variável global
 					cliente_selecionado = resposta;
 
+					$("input#pais").val(resposta['pais']);
+					$("input#cep").val(resposta['cep']);
+					$("input#uf").val(resposta['uf']);
+					$("input#municipio").val(resposta['municipio']);
+					$("input#bairro").val(resposta['bairro']);
+					$("input#logradouro").val(resposta['logradouro']);
+					$("input#numero").val(resposta['numero']);
+					$("input#complemento").val(resposta['complemento']);
+					$("input#referencia").val(resposta['referencia']);
+					
+
+
 					$("#tb_cliente").DataTable().row.add( [
+
 
 						telefone(resposta['telefone1']),
 						resposta['email'],

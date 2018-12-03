@@ -35,13 +35,13 @@ class CreateVendasTable extends Migration
             $table->string('cpf',15)                        ->nullable();
             $table->enum('uf',['AC','AL','AM','AP','BA','CE','DF','ES','GO','MA','MG','MS','MT','PA','PB','PE','PI','PR','RJ','RN','RO','RR','RS','SC','SE','SP','TO'])  ->nullable();
 
+            $table->char('cep',10)                          ->nullable();
             $table->string('municipio',30)                  ->nullable();
             $table->string('bairro',20)                     ->nullable();
             $table->string('logradouro',100)                ->nullable();
             $table->string('numero',20)                     ->nullable();
             $table->string('complemento',100)               ->nullable();
-            $table->char('cep',10)                          ->nullable();
-
+            $table->string('referencia',255)                ->nullable();
 
             $table->string('conta',20)                      ->nullable();
             $table->string('agencia',10)                    ->nullable();

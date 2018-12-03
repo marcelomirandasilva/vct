@@ -99,6 +99,20 @@
 								value="{{$cliente->numero or old('numero')}}" >
 						</div>
 					</div>
+					
+					<div class="item form-group">
+						<label class="control-label col-md-1 col-sm-1 col-xs-12" for="complemento">Complemento</label>
+						<div class="col-md-2 col-sm-2 col-xs-12">
+							<input id="complemento" name="complemento" type="text" placeholder="999" class="form-control input-md"
+								value="{{$cliente->complemento or old('complemento')}}" >
+						</div>
+
+						<label class="control-label col-md-2 col-sm-2 col-xs-12" for="referencia">Ponto de referência</label>
+						<div class="col-md-7 col-sm-7 col-xs-12">
+							<input id="referencia" name="referencia" type="text" placeholder="999" class="form-control input-md"
+								value="{{$cliente->referencia or old('referencia')}}" >
+						</div>
+					</div>
 
 					<div class="ln_solid"> </div>
 					
