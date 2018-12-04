@@ -33,13 +33,14 @@ class VendaController extends Controller
 	public function create()
 	{
 
-		$parceiros 	= Parceiro::orderBy('nome')->get();
-		$clientes 	= Cliente::orderBy('nome')->get();
-		$produtos 	= Produto::orderBy('nome')->get();
-		$unidades  	= pegaValorEnum('produtos', 'unidade');
+		$parceiros 		= Parceiro::orderBy('nome')->get();
+		$clientes 		= Cliente::orderBy('nome')->get();
+		$produtos 		= Produto::orderBy('nome')->get();
+		$unidades  		= pegaValorEnum('produtos', 'unidade');
+		$transportes  	= pegaValorEnum('vendas', 'transporte');
 
 		
-		return view('venda.create',compact('parceiros','clientes','produtos','unidades'));
+		return view('venda.create',compact('parceiros','clientes','produtos','unidades','transportes'));
 		
 	}
 

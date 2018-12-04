@@ -10,6 +10,8 @@
 		</div>
 
 		<div class="x_panel ">
+				
+
 			<div class="x_content">
 				@if( isset($venda))
 				<form id="frm_venda" class="form-horizontal form-label-left" method="post" action="{{url("venda/$venda->id")}}">
@@ -160,6 +162,52 @@
 								<br>
 
 								<div class="form-group">
+									<label class="control-label col-md-1 col-sm-1 col-xs-12" for="transporte"> Transporte </label>
+									<div class="col-md-2 col-sm-2 col-xs-12">
+										<select name="transporte" id="transporte" class="form-control col-md-1" autofocus>
+											<option value=""> Selecione... </option>
+
+											@if (isset($venda)) <!-- variavel para verificar se foi chamado pela edição -->
+												@foreach($transportes as $transporte)
+													@if ( $venda->transporte == $transporte)
+														<option value="{{$transporte}}" selected="selected">{{$transporte}} </option>
+													@else
+														<option value="{{$transporte}}">{{$transporte}} </option>  
+													@endif
+												@endforeach
+											@else
+												@foreach($transportes as $transporte)
+													<option value="{{$transporte}}"> {{$transporte}}  </option>    
+												@endforeach
+											@endif
+										</select>
+									</div>
+
+									<label class="control-label col-md-1 col-sm-1 col-xs-12 " for="dt_entrega">Data</label>
+									<div class="col-md-2 col-sm-2 col-xs-12">
+										<input type="date" id="dt_entrega" class="form-control input_data" name="dt_entrega" 
+										value="{{$venda->dt_entrega or old('dt_entrega')}}">
+									</div> 
+
+									<span id="datepairExample">
+										<label class="control-label col-md-1 col-sm-1 col-xs-12 " for="hh_inicio_entrega">De</label>
+										<div class="col-md-2 col-sm-2 col-xs-12">
+											<input type="text" id="hh_inicio_entrega" class="form-control time start " name="hh_inicio_entrega" 
+											value="{{$venda->hh_inicio_entrega or old('hh_inicio_entrega')}}">
+										</div> 
+
+										<label class="control-label col-md-1 col-sm-1 col-xs-12 " for="hh_termino_entrega">Até</label>
+										<div class="col-md-2 col-sm-2 col-xs-12">
+											<input type="text" id="hh_termino_entrega" class="form-control time end" name="hh_termino_entrega" 
+											value="{{$venda->hh_termino_entrega or old('hh_termino_entrega')}}">
+										</div> 
+									</span>
+
+								</div>
+
+								<div class="ln_solid"> </div>
+								
+								<div class="form-group">
 									<label class="control-label col-md-1 col-sm-1 col-xs-12 " for="pais">Pais</label>
 									<div class="col-md-2 col-sm-2 col-xs-12">
 										<input type="text" id="pais" class="form-control" name="pais" 
@@ -215,10 +263,24 @@
 									</div>
 								</div>
 
-								
+								<div class="ln_solid"> </div>
 
-
-
+								<div class="item form-group">
+									
+									<div class="col-md-2 col-sm-2 col-xs-12">
+										<button type="button" id="btn_frete" class="btn btn-round btn-primary" >
+											<span class="icone-botoes-acao mdi mdi-backburger"></span>   
+											<span class="texto-botoes-acao"> Calcular Frete </span>
+										</button>
+									</div>
+									
+									<div class="col-md-2 col-sm-2 col-xs-12">
+										<input id="frete" name="frete" type="text" placeholder="000" class="form-control input-md"
+											value="{{$venda->frete or old('frete')}}" >
+									</div>
+									<label class="control-label col-md-5 col-sm-5 col-xs-12" id="texto_frete"></label>
+									
+								</div>
 
 							</div>
 							<div id="step-4" class="">
@@ -247,7 +309,9 @@
 				</form>
 			</div>
 		</div>
+		
 	</div>
+	
 	
 @endsection
 
@@ -258,7 +322,9 @@
    <script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js" type="text/javascript"></script>
 	<script src="http://cdn.datatables.net/plug-ins/1.10.19/sorting/datetime-moment.js" type="text/javascript"></script>
 	
-
+	<script async defer
+	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDcdW2PsrS1fbsXKmZ6P9Ii8zub5FDu3WQ&callback=initMap">
+	</script>
 
 	{{-- Vanilla Masker --}}
 	<script src="{{asset('js/vanillaMasker.min.js')}}"></script>
@@ -270,10 +336,77 @@
 	
 		let tabela_venda = [];
 
+		$('#datepairExample .time').timepicker({
+			'showDuration': true,
+			'timeFormat': 'g:ia'
+		});
+
+		// initialize datepair
+		$('#datepairExample').datepair();
+
+		$('#hh_inicio_entrega').timepicker({ 'timeFormat': 'H:i' });
+		$('#hh_termino_entrega').timepicker({ 'timeFormat': 'H:i' });
+
+
+
+		function initMap(destino) {
+			var bounds = new google.maps.LatLngBounds;
+			var service = new google.maps.DistanceMatrixService;
+		};
+
+
+
+
 		$(document).ready(function(){
+
+
 
 			let produto_selecionado;
 			let cliente_selecionado;
+
+			/* var Auto_Complete_Link = "https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins='rua do trabalho, 295 - nova iguaçu'&destinations=nilópolis&key=AIzaSyDcdW2PsrS1fbsXKmZ6P9Ii8zub5FDu3WQ";
+ */
+			
+			
+			$("#btn_frete").click(function() { 
+
+				var bounds = new google.maps.LatLngBounds;
+				var markersArray = [];
+
+				var origin1 = 'Rua do Trabalho, 295, Nova Iguaçu';
+				var destinationA = $("input#logradouro").val()  +"," + $("input#numero").val() +"," + $("input#municipio").val() ; 
+
+				var service = new google.maps.DistanceMatrixService;
+				service.getDistanceMatrix({
+					origins: [origin1],
+					destinations: [destinationA],
+					travelMode: 'DRIVING',
+					unitSystem: google.maps.UnitSystem.METRIC,
+					avoidHighways: false,
+					avoidTolls: false
+				}, function(response, status) {
+					if (status !== 'OK') {
+					alert('Error was: ' + status);
+					} else {
+						let recebe_distancia = response['rows'][0]['elements'][0]['distance']['text'];
+						let recebe_duracao 	= response['rows'][0]['elements'][0]['duration']['text'];
+
+						let distancia 			= recebe_distancia.replace(" km","").replace(",",".");
+						let valor_frete 		= distancia * 2;   /* R$2,00 é o valor do KM de frete */ 
+						let mostra_frete		= valor_frete.toFixed(2).toLocaleString('pt-BR');
+
+						$("input#frete").val("R$ " + mostra_frete );
+ 						console.log(response);
+						console.log(distancia);
+						console.log(valor_frete);
+						
+						$("label#texto_frete").innerHTML = "teste"; //recebe_distancia +" " +" aproximadamente " +recebe_duracao;
+
+					}
+				});
+
+			});
+
 
 			$('#smartwizard').smartWizard({
 				selected: 0,

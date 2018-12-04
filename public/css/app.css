@@ -19710,7 +19710,8 @@ label {
 }
 
 .input_data {
-  padding-left: 2px;
+  padding-left: 5px;
   padding-right: 1px;
+  font-size: 13px;
 }
 

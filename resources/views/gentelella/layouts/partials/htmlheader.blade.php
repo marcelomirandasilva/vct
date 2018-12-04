@@ -23,6 +23,8 @@
   {{-- <link rel="stylesheet" href="{{ asset('/SmartWizard/dist/css/smart_wizard.css') }}">       --}}
   <link rel="stylesheet" href="{{ asset('/SmartWizard/dist/css/smart_wizard_theme_arrows.css') }}">      
   
+  <link rel="stylesheet" href="{{ asset('/timepicker/jquery.timepicker.min.css') }}">      
+  
   
 	
 	<link rel="stylesheet" href="{{ asset('/css/app.css') }}">      

@@ -76,8 +76,12 @@
 		<!-- scripts -->
 		<script src="{{ asset('/js/app.js')}}"></script>
 		<script src="{{ asset('/js/components.js')}}"></script>
+
+		<script src="{{ asset('/timepicker/jquery.timepicker.min.js')}}"></script>
+		<script src="{{ asset('/Datepair/datepair.js')}}"></script>
+		<script src="{{ asset('/Datepair/jquery.datepair.js')}}"></script>
 		
-		
+	
 		
 		<script src="{{ asset('/SmartWizard/dist/js/jquery.smartWizard.min.js')}}"></script>
 		
