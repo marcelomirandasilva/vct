@@ -32,12 +32,12 @@
 						</ul>
 					  
 						<div>
-							<div id="step-1" class="">
+							<div id="step-1" class="" data-toggle="validator">
 								<br>
 								<div class="form-group">
 									<label class="control-label col-md-1 col-sm-1 col-xs-12" for="cliente_id"> Cliente </label>
 									<div class="col-md-5 col-sm-5 col-xs-12">
-										<select name="cliente_id" id="cliente_id" class="form-control col-md-1" autofocus>
+										<select name="cliente_id" id="cliente_id" class="form-control col-md-1" autofocus required>
 											<option value=""> Selecione... </option>
 
 											@if (isset($venda)) <!-- variavel para verificar se foi chamado pela edição -->
@@ -73,7 +73,7 @@
 									</table>
 								</div>
 							</div>
-							<div id="step-2" class="">
+							<div id="step-2" class="" data-toggle="validator">
 								<br>
 								<div class="form-group">
 									<div class="col-md-5 col-sm-5 col-xs-12 ">
@@ -157,7 +157,7 @@
 								</div>
 							</div>
 							
-							<div id="step-3" class="">
+							<div id="step-3" class="" data-toggle="validator">
 								
 								<br>
 
@@ -267,23 +267,24 @@
 
 								<div class="item form-group">
 									
-									<div class="col-md-2 col-sm-2 col-xs-12">
+									<div class="col-md-2 col-sm-2 col-xs-2">
 										<button type="button" id="btn_frete" class="btn btn-round btn-primary" >
 											<span class="icone-botoes-acao mdi mdi-backburger"></span>   
 											<span class="texto-botoes-acao"> Calcular Frete </span>
 										</button>
 									</div>
 									
-									<div class="col-md-2 col-sm-2 col-xs-12">
+									<div class="col-md-2 col-sm-2 col-xs-4 .col-xg-offset-3">
 										<input id="frete" name="frete" type="text" placeholder="000" class="form-control input-md"
 											value="{{$venda->frete or old('frete')}}" >
 									</div>
-									<label class="control-label col-md-5 col-sm-5 col-xs-12" id="texto_frete"></label>
+									<label class="control-label col-md-5 col-sm-5 col-xs-12" id="texto_frete" style="
+									text-align: left"> </label>
 									
 								</div>
 
 							</div>
-							<div id="step-4" class="">
+							<div id="step-4" class="" data-toggle="validator">
 								Step Content4
 							</div>
 						</div>
@@ -331,6 +332,10 @@
 
 	{{-- Atualiza os campos do endereço de acordo com o cep digitado --}}
 	<script src="{{asset("js/endereco.js")}}"></script>
+
+	<!-- Include jQuery Validator plugin -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"></script>
+
 	
 	<script>
 	
@@ -393,15 +398,24 @@
 
 						let distancia 			= recebe_distancia.replace(" km","").replace(",",".");
 						let valor_frete 		= distancia * 2;   /* R$2,00 é o valor do KM de frete */ 
+						
+						if( valor_frete < 10 )
+						{
+							valor_frete = 10;
+							$("label#texto_frete").text(recebe_distancia +" (frete mínimo)" +" -  Aproximadamente " +recebe_duracao) ; 
+						}else{
+							$("label#texto_frete").text(recebe_distancia +" " +" -  Aproximadamente " +recebe_duracao) ; 
+						}
+						
 						let mostra_frete		= valor_frete.toFixed(2).toLocaleString('pt-BR');
 
 						$("input#frete").val("R$ " + mostra_frete );
- 						console.log(response);
-						console.log(distancia);
-						console.log(valor_frete);
 						
-						$("label#texto_frete").innerHTML = "teste"; //recebe_distancia +" " +" aproximadamente " +recebe_duracao;
-
+						
+						
+						console.log(response);
+					  console.log(distancia);
+					  console.log(valor_frete);
 					}
 				});
 
@@ -412,23 +426,41 @@
 				selected: 0,
 				theme: 'arrows',
 				autoAdjustHeight: false,
-				lang: {  // Language variables
-					next: 'Próximo',
-					previous:'Anterior',
-				},
-				/* toolbarSettings: {
-					toolbarExtraButtons: [
-						$('<button></button>').text('Cancelar').addClass('botoes-acao btn btn-round btn-primary').on('click', function(){ 
-							alert('Cancel button click');                            
-						}),
-
-						$('<button></button>').text('Salvar').addClass('botoes-acao btn btn-round btn-success').on('click', function(){ 
-							alert('Finsih button click');                            
-						}),
-					]
-				}, */
+				lang: { previous:'Anterior', next: 'Próximo' },
 				
 			});
+
+			$("#smartwizard").on("leaveStep", function(e, anchorObject, stepNumber, stepDirection) {
+				var passo = stepNumber + 1;
+				var elmForm = $("#step-" + passo);
+				console.log("#step-" + passo);
+				// stepDirection === 'forward' :- this condition allows to do the form validation
+				// only on forward navigation, that makes easy navigation on backwards still do the validation when going next
+				if(stepDirection === 'forward' && elmForm){
+					elmForm.validator('validate');
+					var elmErr = elmForm.children('.has-error');
+					console.log(elmErr);
+					if(elmErr && elmErr.length > 0){
+						// Form validation failed
+						return false;
+					}
+				}
+				return true;
+				
+			});
+
+			
+
+
+
+
+
+
+
+
+
+
+
 
 			
 			$("#tb_produto").DataTable({
