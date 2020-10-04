@@ -26,54 +26,19 @@
 					<div id="smartwizard">
 						<ul>
 							<li><a href="#step-1"><span class="step_no">1</span><span class="step_descr"> Escolha o Cliente </span></a></li>
-							<li><a href="#step-2"><span class="step_no">2</span><span class="step_descr"> Adicione os produtos</span></a></li>
-							<li><a href="#step-3"><span class="step_no">3</span><span class="step_descr"> Entrega</span></a></li>
+							<li><a href="#step-2"><span class="step_no">2</span><span class="step_descr"> Defina a Entrega </span></a></li>
+							<li><a href="#step-3"><span class="step_no">3</span><span class="step_descr"> Adicione os produtos</span></a></li>
 							<li><a href="#step-4"><span class="step_no">4</span><span class="step_descr"> Pagamento</span></a></li>
 						</ul>
 					  
 						<div>
 							<div id="step-1" class="" data-toggle="validator">
-								<br>
-								<div class="form-group">
-									<label class="control-label col-md-1 col-sm-1 col-xs-12" for="cliente_id"> Cliente </label>
-									<div class="col-md-5 col-sm-5 col-xs-12">
-										<select name="cliente_id" id="cliente_id" class="form-control col-md-1" autofocus required>
-											<option value=""> Selecione... </option>
-
-											@if (isset($venda)) <!-- variavel para verificar se foi chamado pela edição -->
-												@foreach($clientes as $cliente)
-													@if ( $venda->cliente == $cliente)
-														<option value="{{$cliente->id}}" selected="selected">{{$cliente->nome}} </option>
-													@else
-														<option value="{{$cliente->id}}">{{$cliente->nome}} </option>  
-													@endif
-												@endforeach
-											@else
-												@foreach($clientes as $cliente)
-													<option value="{{$cliente->id}}"> {{$cliente->nome}}  </option>    
-												@endforeach
-											@endif
-										</select>
-									</div>
-								</div>
-
-								<div class="col-md-12 col-sm-12 col-xs-12 ">
-									<table class="table table-striped table-bordered compact col-md-12 col-sm-12 col-xs-12 " id="tb_cliente">
-										<thead>
-											<tr>
-												<th>Telefone </th>
-												<th>Email</th>
-												<th>Nascimento</th>
-												<th>Endereço</th>
-												<th>Municipio</th>
-											</tr>						
-										</thead>
-										<tbody>
-										</tbody>
-									</table>
-								</div>
+								@include('venda.cliente')
 							</div>
 							<div id="step-2" class="" data-toggle="validator">
+	 								@include('venda.entrega')
+								</div>							
+							<div id="step-3" class="" data-toggle="validator">
 								<br>
 								<div class="form-group">
 									<div class="col-md-5 col-sm-5 col-xs-12 ">
@@ -144,10 +109,12 @@
 											<thead>
 												<tr>
 													<th>Parceiro</th>
+													<th>Produto</th>
 													<th>Quantidade</th>
 													<th>Unidade</th>
 													<th>Venda</th>
 													<th>Venda (g/ml/u)</th>
+													<th>Excluir</th>
 												</tr>						
 											</thead>
 											<tbody>
@@ -157,135 +124,8 @@
 								</div>
 							</div>
 							
-							<div id="step-3" class="" data-toggle="validator">
-								
-								<br>
-
-								<div class="form-group">
-									<label class="control-label col-md-1 col-sm-1 col-xs-12" for="transporte"> Transporte </label>
-									<div class="col-md-2 col-sm-2 col-xs-12">
-										<select name="transporte" id="transporte" class="form-control col-md-1" autofocus>
-											<option value=""> Selecione... </option>
-
-											@if (isset($venda)) <!-- variavel para verificar se foi chamado pela edição -->
-												@foreach($transportes as $transporte)
-													@if ( $venda->transporte == $transporte)
-														<option value="{{$transporte}}" selected="selected">{{$transporte}} </option>
-													@else
-														<option value="{{$transporte}}">{{$transporte}} </option>  
-													@endif
-												@endforeach
-											@else
-												@foreach($transportes as $transporte)
-													<option value="{{$transporte}}"> {{$transporte}}  </option>    
-												@endforeach
-											@endif
-										</select>
-									</div>
-
-									<label class="control-label col-md-1 col-sm-1 col-xs-12 " for="dt_entrega">Data</label>
-									<div class="col-md-2 col-sm-2 col-xs-12">
-										<input type="date" id="dt_entrega" class="form-control input_data" name="dt_entrega" 
-										value="{{$venda->dt_entrega or old('dt_entrega')}}">
-									</div> 
-
-									<span id="datepairExample">
-										<label class="control-label col-md-1 col-sm-1 col-xs-12 " for="hh_inicio_entrega">De</label>
-										<div class="col-md-2 col-sm-2 col-xs-12">
-											<input type="text" id="hh_inicio_entrega" class="form-control time start " name="hh_inicio_entrega" 
-											value="{{$venda->hh_inicio_entrega or old('hh_inicio_entrega')}}">
-										</div> 
-
-										<label class="control-label col-md-1 col-sm-1 col-xs-12 " for="hh_termino_entrega">Até</label>
-										<div class="col-md-2 col-sm-2 col-xs-12">
-											<input type="text" id="hh_termino_entrega" class="form-control time end" name="hh_termino_entrega" 
-											value="{{$venda->hh_termino_entrega or old('hh_termino_entrega')}}">
-										</div> 
-									</span>
-
-								</div>
-
-								<div class="ln_solid"> </div>
-								
-								<div class="form-group">
-									<label class="control-label col-md-1 col-sm-1 col-xs-12 " for="pais">Pais</label>
-									<div class="col-md-2 col-sm-2 col-xs-12">
-										<input type="text" id="pais" class="form-control" name="pais" 
-										value="{{$venda->pais or old('pais')}}">
-									</div> 
-					
-									<label class="control-label col-md-1 col-sm-1 col-xs-12" for="cep">CEP</label>
-									<div class="col-md-2 col-sm-2 col-xs-12">
-										<input id="cep" name="cep" type="text" placeholder="99.999-999" class="form-control input-md cep" 
-											value="{{$venda->cep or old('cep')}}" >
-									</div>
-									<label class="control-label col-md-1 col-sm-1 col-xs-12" for="uf">UF</label>
-									<div class="col-md-1 col-sm-1 col-xs-12">
-										<input id="uf" name="uf" type="text"  class="form-control input-md uf"
-											value="{{$venda->uf or old('uf')}}" >
-									</div>
-									<label class="control-label col-md-1 col-sm-1 col-xs-12" for="municipio">Município</label>
-									<div class="col-md-3 col-sm-3 col-xs-12">
-										<input id="municipio" name="municipio" type="text" class="form-control input-md" 
-											value="{{$venda->municipio or old('municipio')}}" >
-									</div>
-								</div>
-
-								<div class="item form-group">
-				
-									<label class="control-label col-md-1 col-sm-1 col-xs-12" for="bairro">Bairro</label>
-									<div class="col-md-3 col-sm-3 col-xs-12">
-										<input id="bairro" name="bairro" type="text" placeholder="Centro" class="form-control input-md"
-												value="{{$venda->bairro or old('bairro')}}" >
-									</div>
-									<label class="control-label col-md-1 col-sm-1 col-xs-12" for="logradouro">Logradouro</label>
-									<div class="col-md-4 col-sm-4 col-xs-12">
-										<input id="logradouro" name="logradouro" type="text" placeholder="Av, Rua, Travessa..." class="form-control input-md"
-											value="{{$venda->logradouro or old('logradouro')}}" >
-									</div>
-									<label class="control-label col-md-1 col-sm-1 col-xs-12" for="numero">Numero</label>
-									<div class="col-md-2 col-sm-2 col-xs-12">
-										<input id="numero" name="numero" type="text" placeholder="999" class="form-control input-md"
-											value="{{$venda->numero or old('numero')}}" >
-									</div>
-								</div>
-								<div class="item form-group">
-									<label class="control-label col-md-1 col-sm-1 col-xs-12" for="complemento">Complemento</label>
-									<div class="col-md-2 col-sm-2 col-xs-12">
-										<input id="complemento" name="complemento" type="text" placeholder="999" class="form-control input-md"
-											value="{{$venda->complemento or old('complemento')}}" >
-									</div>
-
-									<label class="control-label col-md-2 col-sm-2 col-xs-12" for="referencia">Ponto de referência</label>
-									<div class="col-md-7 col-sm-7 col-xs-12">
-										<input id="referencia" name="referencia" type="text" placeholder="999" class="form-control input-md"
-											value="{{$venda->referencia or old('referencia')}}" >
-									</div>
-								</div>
-
-								<div class="ln_solid"> </div>
-
-								<div class="item form-group">
-									
-									<div class="col-md-2 col-sm-2 col-xs-2">
-										<button type="button" id="btn_frete" class="btn btn-round btn-primary" >
-											<span class="icone-botoes-acao mdi mdi-backburger"></span>   
-											<span class="texto-botoes-acao"> Calcular Frete </span>
-										</button>
-									</div>
-									
-									<div class="col-md-2 col-sm-2 col-xs-4 .col-xg-offset-3">
-										<input id="frete" name="frete" type="text" placeholder="000" class="form-control input-md"
-											value="{{$venda->frete or old('frete')}}" >
-									</div>
-									<label class="control-label col-md-5 col-sm-5 col-xs-12" id="texto_frete" style="
-									text-align: left"> </label>
-									
-								</div>
-
-							</div>
 							<div id="step-4" class="" data-toggle="validator">
-								Step Content4
+								@include('venda.pagamento')
 							</div>
 						</div>
 					</div>
@@ -339,7 +179,7 @@
 	
 	<script>
 	
-		let tabela_venda = [];
+		let itens_venda = [];
 
 		$('#datepairExample .time').timepicker({
 			'showDuration': true,
@@ -449,18 +289,6 @@
 				
 			});
 
-			
-
-
-
-
-
-
-
-
-
-
-
 
 			
 			$("#tb_produto").DataTable({
@@ -524,6 +352,10 @@
 					//coloca o produto selecionado na variável global
 					produto_selecionado = resposta;
 
+					//coloca o valor e a quantidade nos inputs 
+					$("input#quantidade").val(produto_selecionado['quantidade']);
+					$("input#v_venda").val(produto_selecionado['valor_venda']);
+
 					$("#tb_produto").DataTable().row.add( [
 						resposta['parceiro']['nome'],
 						resposta['quantidade'],
@@ -585,6 +417,8 @@
 						break;
 					}
 
+
+
 				});
 
 
@@ -595,10 +429,11 @@
 			/*  select de UNIDADE */
 			$("select#unidade").change(function() {
 				v_unidade = $("select#unidade option:selected").val();
+				$("input#quantidade").change();
 				console.log(v_unidade);
 			});
 
-			$("input#quantidade").focusout(function() {
+			$("input#quantidade").change(function() {
 
 				console.log(cliente_selecionado);
 				console.log(produto_selecionado);
@@ -686,29 +521,37 @@
 			$("#btn_inserir").click(function() {
 				event.preventDefault();
 
-				v_parceiro_id		= produto_selecionado['parceiro']['id'],
-				v_parceiro_nome	= produto_selecionado['parceiro']['nome'],
+				v_parceiro_id			= produto_selecionado['parceiro']['id'],
+				v_parceiro_nome		= produto_selecionado['parceiro']['nome'],
 
-				v_produto_id		= produto_selecionado['id'],
-				v_produto_nome		= produto_selecionado['nome'],
+				v_produto_id			= produto_selecionado['id'],
+				v_produto_nome			= produto_selecionado['nome'],
+				v_valor_venda_unidade= produto_selecionado['valor_venda_unidade'],
 
-				v_unidade 			= $("select#unidade option:selected").val();
-				v_quantidade 		= $("input#quantidade").val();
-				v_venda 				= $("input#v_venda").val();
+				v_unidade 				= $("select#unidade option:selected").val();
+				v_quantidade 			= $("input#quantidade").val();
+				v_venda 					= $("input#v_venda").val();
 
+				v_btn_excluir=
+					"<a class='btn btn-warning btn-xs action btn_tb_membro_remove' data-toggle='tooltip' data-placement='bottom' title='Remove esse Item' style='margin-bottom: 0px;'> <i class='glyphicon glyphicon-remove'></i></a>";
+				
 
-				//tabela_venda.push(v_produto);
-			
-
+				itens_venda.push([
+					v_parceiro_id, v_produto_id, v_produto_nome, v_valor_venda_unidade, v_unidade, v_quantidade, v_venda
+				]);
+				
 				$("#tb_venda").DataTable().row.add( [
 
 					v_parceiro_nome,
 					v_produto_nome,
-					v_unidade,
 					v_quantidade,
+					v_unidade,
 					v_venda,
+					v_valor_venda_unidade,
+					v_btn_excluir
 				] ).draw( false );
 		
+				console.log(itens_venda);
   			})
 
 
@@ -718,6 +561,24 @@
 				window.history.back();
 	      });
 
+			//enviar o formulario
+			$("#frm_venda").submit(function(){
+
+				for(i=0; i<tabela_membros_id.length; i++){
+	
+					// Stringificar os campos
+					let presencas_em_string = JSON.stringify({
+						membro_id:  tabela_membros_id[i],
+						cargo_id:   tabela_cargos_id[i]
+					});
+
+					// Adicionar o novo cargo no formulário
+					$("#form_pressenca_sessao").append("<input type='hidden' class='presencas' name='presencas[]' value='"+presencas_em_string+"'>");
+				}
+
+				//Adicionar o novo cargo no formulário
+				$("#frm_venda").append("<input type='hidden' class='itens_venda' name='itens_venda[]' value='"+itens_venda+"'>");
+			});
 			
 		});
 
@@ -753,11 +614,3 @@
 	</script>
 
 @endpush
-
-
-
-
-
-
-
-

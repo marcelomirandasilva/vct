@@ -38,9 +38,10 @@ class VendaController extends Controller
 		$produtos 		= Produto::orderBy('nome')->get();
 		$unidades  		= pegaValorEnum('produtos', 'unidade');
 		$transportes  	= pegaValorEnum('vendas', 'transporte');
+		$tp_pagamentos	= pegaValorEnum('vendas', 'tp_pagamento');
 
 		
-		return view('venda.create',compact('parceiros','clientes','produtos','unidades','transportes'));
+		return view('venda.create',compact('parceiros','clientes','produtos','unidades','transportes','tp_pagamentos'));
 		
 	}
 
@@ -52,6 +53,17 @@ class VendaController extends Controller
 		
 		$request->merge(['valor_venda'  => 
 		str_replace('R$ ', '', str_replace(',', '.', str_replace('.', '', $request->valor_venda))) ]);
+
+
+		//cria as itens_venda 
+		if(isset($request->itens_venda))
+		{
+			foreach($request->itens_venda as $key => $item)
+			{
+				$cg = json_decode($item) ;
+				$novaItem->itens()->attach($cg->membro_id, ['cargo_id' => $cg->cargo_id]);
+			}
+		}
 		
 		dd($request->all());
 
