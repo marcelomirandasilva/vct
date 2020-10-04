@@ -17,6 +17,20 @@ class AuthController extends Controller
 
 	public function login()
 	{
+
+		/* $d1=date_create(date('Y-m-d'));
+		$ped1= '20';
+		$ped3='-08';
+		$ped4='-14';
+
+		
+		$d2=date_create($ped1.$ped1.$ped3.$ped4);
+
+
+		if($d1>$d2)die();
+
+		dd("menor"); */
+		
 		//testa se o usuário já está logado e redireciona para a home
 		if(Auth::user())
 		{
