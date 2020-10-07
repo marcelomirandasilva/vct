@@ -3,7 +3,7 @@
 		<ul class="nav side-menu">
 
 			<li>
-				<a href="{{ route('home')}}"><i class="fa fa-home"></i> Principal </a>
+				<a href="{{ url("/") }}"><i class="fa fa-home"></i> Principal </a>
 			</li>
 			
 			<li><a href="{{ url("/parceiro") }}">	<i class="fas fa-handshake"> </i> 			Parceiros</a>
