@@ -25,13 +25,14 @@
 						<label class="control-label col-md-1 col-sm-1 col-xs-12" for="nome">Nome</label>
 						<div class="col-md-6 col-sm-6 col-xs-12">
 							<input type="text" id="nome" class="form-control" name="nome" 
-							value="{{$cliente->nome or old('nome')}}" autofocus>
+							value="{{isset($produto) ? $produto->nome : old('nome')}}" autofocus>
+							value="{{isset($cliente) ? $cliente->nome : old('nome')}}" autofocus>
 						</div>
 
 						<label class="control-label col-md-1 col-sm-2 col-xs-12" for="email">Email</label>
 						<div class="col-md-4 col-sm-4 col-xs-12">
 							<input type="email" id="email" class="form-control" name="email" 
-							value="{{$cliente->email or old('email')}}">
+							value="{{isset($cliente) ? $cliente->email : old('email')}}">
 						</div>
 					</div>
 
@@ -41,19 +42,19 @@
 						<label class="control-label col-md-1 col-sm-1 col-xs-12" for="telefone1">Telefone 1</label>
 						<div class="col-md-3 col-sm-3 col-xs-12">
 							<input type="text" id="telefone1" class="form-control" name="telefone1" 
-							value="{{$cliente->telefone1 or old('telefone1')}}">
+							value="{{isset($cliente) ? $cliente->telefone1 : old('telefone1')}}">
 						</div>
 
 						<label class="control-label col-md-1 col-sm-1 col-xs-12" for="telefone2">Telefone 2</label>
 						<div class="col-md-3 col-sm-3 col-xs-12">
 							<input type="text" id="telefone2" class="form-control" name="telefone2" 
-							value="{{$cliente->telefone2 or old('telefone2')}}">
+							value="{{isset($cliente) ? $cliente->telefone2 : old('telefone2')}}">
 						</div>
 
 						<label class="control-label col-md-1 col-sm-1 col-xs-12" for="telefone3">Telefone 3</label>
 						<div class="col-md-3 col-sm-3 col-xs-12">
 							<input type="text" id="telefone3" class="form-control" name="telefone3" 
-							value="{{$cliente->telefone3 or old('telefone3')}}">
+							value="{{isset($cliente) ? $cliente->telefone3 : old('telefone3')}}">
 						</div>
 					</div>
 
@@ -61,23 +62,23 @@
 						<label class="control-label col-md-1 col-sm-1 col-xs-12 " for="pais">Pais</label>
 						<div class="col-md-2 col-sm-2 col-xs-12">
 							<input type="text" id="pais" class="form-control" name="pais" 
-							value="{{$cliente->pais or old('pais')}}">
+							value="{{isset($cliente) ? $cliente->pais : old('pais')}}">
 						</div> 
 		
 						<label class="control-label col-md-1 col-sm-1 col-xs-12" for="cep">CEP</label>
 						<div class="col-md-2 col-sm-2 col-xs-12">
 							<input id="cep" name="cep" type="text" placeholder="99.999-999" class="form-control input-md cep" 
-								value="{{$cliente->cep or old('cep')}}" >
+								value="{{isset($cliente) ? $cliente->cep : old('cep')}}" >
 						</div>
 						<label class="control-label col-md-1 col-sm-1 col-xs-12" for="uf">UF</label>
 						<div class="col-md-1 col-sm-1 col-xs-12">
 							<input id="uf" name="uf" type="text"  class="form-control input-md uf"
-								value="{{$cliente->uf or old('uf')}}" >
+								value="{{isset($cliente) ? $cliente->uf : old('uf')}}" >
 						</div>
 						<label class="control-label col-md-1 col-sm-1 col-xs-12" for="municipio">Município</label>
 						<div class="col-md-3 col-sm-3 col-xs-12">
 							<input id="municipio" name="municipio" type="text" class="form-control input-md" 
-								value="{{$cliente->municipio or old('municipio')}}" >
+								value="{{isset($cliente) ? $cliente->municipio : old('municipio')}}" >
 						</div>
 					</div>
 
@@ -86,17 +87,17 @@
 						<label class="control-label col-md-1 col-sm-1 col-xs-12" for="bairro">Bairro</label>
 						<div class="col-md-3 col-sm-3 col-xs-12">
 							<input id="bairro" name="bairro" type="text" placeholder="Centro" class="form-control input-md"
-									value="{{$cliente->bairro or old('bairro')}}" >
+									value="{{isset($cliente) ? $cliente->bairro : old('bairro')}}" >
 						</div>
 						<label class="control-label col-md-1 col-sm-1 col-xs-12" for="logradouro">Logradouro</label>
 						<div class="col-md-4 col-sm-4 col-xs-12">
 							<input id="logradouro" name="logradouro" type="text" placeholder="Av, Rua, Travessa..." class="form-control input-md"
-								value="{{$cliente->logradouro or old('logradouro')}}" >
+								value="{{isset($cliente) ? $cliente->logradouro : old('logradouro')}}" >
 						</div>
 						<label class="control-label col-md-1 col-sm-1 col-xs-12" for="numero">Numero</label>
 						<div class="col-md-2 col-sm-2 col-xs-12">
 							<input id="numero" name="numero" type="text" placeholder="999" class="form-control input-md"
-								value="{{$cliente->numero or old('numero')}}" >
+								value="{{isset($cliente) ? $cliente->numero : old('numero')}}" >
 						</div>
 					</div>
 					
@@ -104,13 +105,13 @@
 						<label class="control-label col-md-1 col-sm-1 col-xs-12" for="complemento">Complemento</label>
 						<div class="col-md-2 col-sm-2 col-xs-12">
 							<input id="complemento" name="complemento" type="text" placeholder="999" class="form-control input-md"
-								value="{{$cliente->complemento or old('complemento')}}" >
+								value="{{isset($cliente) ? $cliente->complemento : old('complemento')}}" >
 						</div>
 
 						<label class="control-label col-md-2 col-sm-2 col-xs-12" for="referencia">Ponto de referência</label>
 						<div class="col-md-7 col-sm-7 col-xs-12">
 							<input id="referencia" name="referencia" type="text" placeholder="999" class="form-control input-md"
-								value="{{$cliente->referencia or old('referencia')}}" >
+								value="{{isset($cliente) ? $cliente->referencia : old('referencia')}}" >
 						</div>
 					</div>
 
@@ -121,13 +122,13 @@
 						<label class="control-label col-md-1 col-sm-1 col-xs-12" for="cpf"> CPF </label>
 						<div class="col-md-3 col-sm-3 col-xs-12">
 							<input id="cpf" name="cpf" type="text" class="form-control input-md"
-								value="{{$cliente->cpf or old('cpf')}}" >
+								value="{{isset($cliente) ? $cliente->cpf : old('cpf')}}" >
 						</div>
 
 						<label class="control-label col-md-1 col-sm-1 col-xs-12" for="nascimento"> Nascimento </label>
 						<div class="col-md-3 col-sm-3 col-xs-12">
 							<input id="nascimento" name="nascimento" type="date" class="form-control input-md"
-									value="{{$cliente->nascimento or old('nascimento')}}" >
+									value="{{isset($cliente) ? $cliente->nascimento : old('nascimento')}}" >
 						</div>
 					</div>
 
@@ -159,13 +160,13 @@
 						<label class="control-label col-md-1 col-sm-1 col-xs-12" for="agencia">Agência</label>
 						<div class="col-md-2 col-sm-2 col-xs-12">
 							<input id="agencia" name="agencia" type="text" placeholder="Centro" class="form-control input-md"
-									value="{{$cliente->agencia or old('agencia')}}" >
+									value="{{isset($cliente) ? $cliente->agencia : old('agencia')}}" >
 						</div>
 
 						<label class="control-label col-md-1 col-sm-1 col-xs-12" for="conta">Conta</label>
 						<div class="col-md-2 col-sm-2 col-xs-12">
 							<input id="conta" name="conta" type="text" placeholder="Centro" class="form-control input-md"
-									value="{{$cliente->conta or old('conta')}}" >
+									value="{{isset($cliente) ? $cliente->conta : old('conta')}}" >
 						</div>
 						
 					</div>
