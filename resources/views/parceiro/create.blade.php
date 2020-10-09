@@ -25,13 +25,13 @@
 						<label class="control-label col-md-1 col-sm-1 col-xs-12" for="nome">Nome</label>
 						<div class="col-md-6 col-sm-6 col-xs-12">
 							<input type="text" id="nome" class="form-control" name="nome" 
-							value="{{$parceiro->nome or old('nome')}}" autofocus>
+							value="{{isset($parceiro) ? $parceiro->nome : old('nome')}}" autofocus>
 						</div>
 
 						<label class="control-label col-md-1 col-sm-2 col-xs-12" for="email">Email</label>
 						<div class="col-md-4 col-sm-4 col-xs-12">
 							<input type="email" id="email" class="form-control" name="email" 
-							value="{{$parceiro->email or old('email')}}">
+							value="{{isset($parceiro) ? $parceiro->email : old('email')}}">
 						</div>
 					</div>
 
@@ -41,19 +41,19 @@
 							<label class="control-label col-md-1 col-sm-1 col-xs-12" for="telefone1">Telefone 1</label>
 							<div class="col-md-3 col-sm-3 col-xs-12">
 								<input type="text" id="telefone1" class="form-control" name="telefone1" 
-								value="{{$parceiro->telefone1 or old('telefone1')}}">
+								value="{{isset($parceiro) ? $parceiro->telefone1 : old('telefone1')}}">
 							</div>
 	
 							<label class="control-label col-md-1 col-sm-1 col-xs-12" for="telefone2">Telefone 2</label>
 							<div class="col-md-3 col-sm-3 col-xs-12">
 								<input type="text" id="telefone2" class="form-control" name="telefone2" 
-								value="{{$parceiro->telefone2 or old('telefone2')}}">
+								value="{{isset($parceiro) ? $parceiro->telefone2 : old('telefone2')}}">
 							</div>
 	
 							<label class="control-label col-md-1 col-sm-1 col-xs-12" for="telefone3">Telefone 3</label>
 							<div class="col-md-3 col-sm-3 col-xs-12">
 								<input type="text" id="telefone3" class="form-control" name="telefone3" 
-								value="{{$parceiro->telefone3 or old('telefone3')}}">
+								value="{{isset($parceiro) ? $parceiro->telefone3 : old('telefone3')}}">
 							</div>
 						</div>
 
@@ -61,23 +61,23 @@
 						<label class="control-label col-md-1 col-sm-1 col-xs-12 " for="pais">Pais</label>
 						<div class="col-md-2 col-sm-2 col-xs-12">
 							<input type="text" id="pais" class="form-control" name="pais" 
-							value="{{$parceiro->pais or old('pais')}}">
+							value="{{isset($parceiro) ? $parceiro->pais : old('pais')}}">
 						</div> 
 		
 						<label class="control-label col-md-1 col-sm-1 col-xs-12" for="cep">CEP</label>
 						<div class="col-md-2 col-sm-2 col-xs-12">
 							<input id="cep" name="cep" type="text" placeholder="99.999-999" class="form-control input-md cep" 
-								value="{{$parceiro->cep or old('cep')}}" >
+								value="{{isset($parceiro) ? $parceiro->cep : old('cep')}}" >
 						</div>
 						<label class="control-label col-md-1 col-sm-1 col-xs-12" for="uf">UF</label>
 						<div class="col-md-1 col-sm-1 col-xs-12">
 							<input id="uf" name="uf" type="text"  class="form-control input-md uf"
-								value="{{$parceiro->uf or old('uf')}}" >
+								value="{{isset($parceiro) ? $parceiro->uf : old('uf')}}" >
 						</div>
 						<label class="control-label col-md-1 col-sm-1 col-xs-12" for="municipio">Município</label>
 						<div class="col-md-3 col-sm-3 col-xs-12">
 							<input id="municipio" name="municipio" type="text" class="form-control input-md" 
-								value="{{$parceiro->municipio or old('municipio')}}" >
+								value="{{isset($parceiro) ? $parceiro->municipio : old('municipio')}}" >
 						</div>
 					</div>
 
@@ -86,17 +86,17 @@
 						<label class="control-label col-md-1 col-sm-1 col-xs-12" for="bairro">Bairro</label>
 						<div class="col-md-3 col-sm-3 col-xs-12">
 							<input id="bairro" name="bairro" type="text" placeholder="Centro" class="form-control input-md"
-									value="{{$parceiro->bairro or old('bairro')}}" >
+									value="{{isset($parceiro) ? $parceiro->bairro : old('bairro')}}" >
 						</div>
 						<label class="control-label col-md-1 col-sm-1 col-xs-12" for="logradouro">Logradouro</label>
 						<div class="col-md-4 col-sm-4 col-xs-12">
 							<input id="logradouro" name="logradouro" type="text" placeholder="Av, Rua, Travessa..." class="form-control input-md"
-								value="{{$parceiro->logradouro or old('logradouro')}}" >
+								value="{{isset($parceiro) ? $parceiro->logradouro : old('logradouro')}}" >
 						</div>
 						<label class="control-label col-md-1 col-sm-1 col-xs-12" for="numero">Numero</label>
 						<div class="col-md-2 col-sm-2 col-xs-12">
 							<input id="numero" name="numero" type="text" placeholder="999" class="form-control input-md"
-								value="{{$parceiro->numero or old('numero')}}" >
+								value="{{isset($parceiro) ? $parceiro->numero : old('numero')}}" >
 						</div>
 					</div>
 
@@ -106,7 +106,7 @@
 						<i class="control-label col-md-1 col-sm-1 col-xs-12 fab fa-chrome" style="font-size: 18pt"> </i>
 						<div class="col-md-10 col-sm-10 col-xs-12">
 							<input id="site" name="site" type="url" class="form-control input-md"
-									value="{{$parceiro->site or old('site')}}" >
+									value="{{isset($parceiro) ? $parceiro->site : old('site')}}" >
 						</div>
 					</div>
 
@@ -114,7 +114,7 @@
 						<i class="control-label col-md-1 col-sm-1 col-xs-12 fab fa-facebook" style="font-size: 18pt"> </i>
 						<div class="col-md-10 col-sm-10 col-xs-12">
 							<input id="facebook" name="facebook" type="url" class="form-control input-md"
-									value="{{$parceiro->facebook or old('facebook')}}" >
+									value="{{isset($parceiro) ? $parceiro->facebook : old('facebook')}}" >
 						</div>
 					</div>
 
@@ -122,7 +122,7 @@
 							<i class="control-label col-md-1 col-sm-1 col-xs-12 fab fa-instagram" style="font-size: 18pt"> </i>
 							<div class="col-md-10 col-sm-10 col-xs-12">
 								<input id="instagram" name="instagram" type="url" class="form-control input-md"
-										value="{{$parceiro->instagram or old('instagram')}}" >
+										value="{{isset($parceiro) ? $parceiro->instagram : old('instagram')}}" >
 							</div>
 						</div>
 
@@ -150,14 +150,15 @@
 
 						<div class="col-md-3 col-sm-3 col-xs-12">
 							<input id="cadastro" name="cadastro" type="text" class="form-control input-md"
-								value="{{$parceiro->cadastro or old('cadastro')}}" >
+								value="{{isset($parceiro) ? $parceiro->cadastro : old('cadastro')}}" >
 						</div>
 					</div>
 
 					<div class="item form-group">
-						<label class="control-label col-md-1 col-sm-1 col-xs-12" for="banco"> Banco </label>
+						<label class="control-label col-md-1 col-sm-1 col-xs-12" for="banco_id"> Banco </label>
 						<div class="col-md-5 col-sm-5 col-xs-12">
-							<select name="banco" id="banco" class="form-control col-md-1" >
+							<select name="banco_id" id="banco_id" class="form-control col-md-1" >
+								<option value=""> ... </option>
 								@if (isset($parceiro)) <!-- variavel para verificar se foi chamado pela edição -->
 									@foreach($bancos as $banco)
 										@if ( $parceiro->banco == $banco)
@@ -177,13 +178,13 @@
 						<label class="control-label col-md-1 col-sm-1 col-xs-12" for="agencia">Agência</label>
 						<div class="col-md-2 col-sm-2 col-xs-12">
 							<input id="agencia" name="agencia" type="text" placeholder="Centro" class="form-control input-md"
-									value="{{$parceiro->agencia or old('agencia')}}" >
+									value="{{isset($parceiro) ? $parceiro->agencia : old('agencia')}}" >
 						</div>
 
 						<label class="control-label col-md-1 col-sm-1 col-xs-12" for="conta">Conta</label>
 						<div class="col-md-2 col-sm-2 col-xs-12">
 							<input id="conta" name="conta" type="text" placeholder="Centro" class="form-control input-md"
-									value="{{$parceiro->conta or old('conta')}}" >
+									value="{{isset($parceiro) ? $parceiro->conta : old('conta')}}" >
 						</div>
 					</div>
 					

@@ -18,14 +18,14 @@
 				@else
 					<form id="frm_produto" class="form-horizontal form-label-left" method="post" action="{{route('produto.store') }}">
 				@endif
-					
+					 
 					{{csrf_field()}}
 												
 					<div class="form-group">
 						<label class="control-label col-md-1 col-sm-1 col-xs-12" for="nome">Nome</label>
 						<div class="col-md-5 col-sm-5 col-xs-12">
 							<input type="text" id="nome" class="form-control" name="nome" 
-							value="{{$produto->nome or old('nome')}}" autofocus>
+							value="{{isset($produto) ? $produto->nome : old('nome')}}" autofocus>
 						</div>
 
 						<label class="control-label col-md-1 col-sm-1 col-xs-12" for="parceiro_id"> Parceiro </label>
@@ -73,20 +73,18 @@
 						<label class="control-label col-md-1 col-sm-1 col-xs-12" for="quantidade">Quantidade</label>
 						<div class="col-md-2 col-sm-2 col-xs-12">
 							<input type="number" id="quantidade" class="form-control" name="quantidade" 
-							value="{{$produto->quantidade or old('quantidade')}}">
+							value="{{isset($produto) ? $produto->quantidade : old('quantidade')}}">
 						</div>
 						
 						<label class="control-label col-md-1 col-sm-1 col-xs-12 " for="valor_compra">V.Compra</label>
 						<div class="col-md-2 col-sm-2 col-xs-12">
-							<input type="text"   id="valor_compra" class="form-control money" 
-								name="valor_compra"  
-								value="{{$produto->valor_compra or old('valor_compra')}}">
+							<input type="text"   id="valor_compra" class="form-control money"name="valor_compra"  
+								value="{{isset($produto) ? $produto->valor_compra : old('valor_compra')}}">
 						</div> 
 						<label class="control-label col-md-1 col-sm-1 col-xs-12 " for="valor_venda">V.Venda</label>
 						<div class="col-md-2 col-sm-2 col-xs-12">
-							<input type="text"   id="valor_venda" class="form-control money" 
-							name="valor_venda"  
-							value="{{$produto->valor_venda or old('valor_venda')}}">
+							<input type="text"   id="valor_venda" class="form-control money" name="valor_venda"  
+							value="{{isset($produto) ? $produto->valor_venda : old('valor_venda')}}">
 						</div> 
 						
 					</div>
@@ -119,7 +117,7 @@
 						</label>
 						<div class="col-md-2 col-sm-2 col-xs-12">
 							<input type="text" id="compra_unidade" class="form-control " disabled 
-								value=" {{ $produto->valor_compra_unidade or old('valor_compra_unidade') }} ">
+								value=" {{ isset($produto) ? $produto->valor_compra_unidade : old('valor_compra_unidade') }} ">
 						</div>
 
 
@@ -128,7 +126,7 @@
 						</label>
 						<div class="col-md-2 col-sm-2 col-xs-12">
 							<input type="text"  id="venda_unidade" class="form-control " disabled 
-								value=" {{ $produto->valor_venda_unidade or old('valor_venda_unidade') }} ">
+								value=" {{ isset($produto) ? $produto->valor_venda_unidade : old('valor_venda_unidade') }} ">
 								
 						</div>
 
@@ -195,10 +193,15 @@
 
 		}
 		
+			$( "#produto" ).focus();
 	
 		$(document).ready(function(){
 
 			
+			//transforma todas as letras do input em MAIÚSCULAS
+				$('input').keyup(function() {
+				this.value = this.value.toLocaleUpperCase();
+			});
 			
 /* 			//botão de cancelar
 			$("#btn_cancelar").click(function(){

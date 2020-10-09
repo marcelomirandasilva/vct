@@ -40,6 +40,7 @@ class ProdutoController extends Controller
 
 	public function store(Request $request)
 	{
+
 		
 		$request->merge(['valor_compra' => 
 		str_replace('R$ ', '', str_replace(',', '.', str_replace('.', '', $request->valor_compra))) ]);
@@ -95,7 +96,7 @@ class ProdutoController extends Controller
 	
 	public function update(Request $request, Produto $produto)
 	{
-		
+		dd( $request->all() );
 		$request->merge(['valor_compra' => 
 		str_replace('R$ ', '', str_replace(',', '.', str_replace('.', '', $request->valor_compra))) ]);
 		

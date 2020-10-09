@@ -89,6 +89,7 @@ class ParceiroController extends Controller
 
 	public function update(Request $request, Parceiro $parceiro)
 	{
+		//dd($request->all());
 		$request->merge(['telefone1' => retiraMascaraTelefone($request->telefone1)]);
 		$request->merge(['telefone2' => retiraMascaraTelefone($request->telefone2)]);
 		$request->merge(['telefone3' => retiraMascaraTelefone($request->telefone3)]);
