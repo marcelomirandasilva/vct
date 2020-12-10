@@ -41,6 +41,7 @@ class VendaController extends Controller
 		$tp_pagamentos	= pegaValorEnum('vendas', 'tp_pagamento');
 
 		
+		
 		return view('venda.create',compact('parceiros','clientes','produtos','unidades','transportes','tp_pagamentos'));
 		
 	}
@@ -65,7 +66,7 @@ class VendaController extends Controller
 			}
 		}
 		
-		dd($request->all());
+	//	dd($request->all());
 
 		//inicia sessão de banco
 		DB::beginTransaction();

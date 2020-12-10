@@ -4,11 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-use App\Models\Veiculo;
-use App\Models\Posto;
-use App\Models\User;
-use App\Models\Abastecimento;
-use App\Models\Edicao_abastecimento;
+use App\Models\Produto;
+use App\Models\Parceiro;
+use App\Models\Cliente;
 use Carbon\Carbon;
 use Datatables;
 
@@ -32,7 +30,12 @@ class HomeController extends Controller
 	 */
 	public function index()
 	{
-//		
+
+		$qtdProdutos 	= Produto::count();
+		$qtdParceiros 	= Parceiro::count();
+		$qtdClientes 	= Cliente::count();
+
+		//		
 //		$qtdVeiculos = Veiculo::count();
 //
 //		
@@ -152,7 +155,8 @@ class HomeController extends Controller
 //			->get();
 
 //		return view('home', compact('qtdVeiculos','vetor','valor_total_mensal'));
-		return view('home');
+		return view('home', compact('qtdProdutos','qtdParceiros','qtdClientes'));
+
 	}
 
 	public function graf1()

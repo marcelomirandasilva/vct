@@ -96,7 +96,7 @@ class ProdutoController extends Controller
 	
 	public function update(Request $request, Produto $produto)
 	{
-		dd( $request->all() );
+		//dd( $request->all() );
 		$request->merge(['valor_compra' => 
 		str_replace('R$ ', '', str_replace(',', '.', str_replace('.', '', $request->valor_compra))) ]);
 		
@@ -117,7 +117,7 @@ class ProdutoController extends Controller
 
 		if($salvou){
 			DB::commit();
-			return redirect('produto')->with('sucesso', 'Produto alterado com sucesso!');
+			return redirect('produto')->with('sucesso', 'Parabéns Juju, seu Produto foi alterado com sucesso!');
 		} else {
 			//Fail, desfaz as alterações no banco de dados
 			DB::rollBack();

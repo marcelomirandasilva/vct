@@ -46,7 +46,7 @@
 										<select name="produto" id="produto" class="form-control col-md-1" >
 											<option value=""> Selecione... </option>
 											@foreach($produtos as $produto)
-												<option value="{{$produto->id}}">{{$produto->nome}} </option>  
+												<option value="{{$produto->id}}">{{$produto->nome}} - {{$produto->parceiro['nome']}} </option>  
 											@endforeach
 										</select>
 									</div>

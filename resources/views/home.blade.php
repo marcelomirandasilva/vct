@@ -6,23 +6,19 @@
 
 	<div class="row tile_count">
 		<caixa 
-			numero=10 icone="fa fa-car" titulo="Total de Veículos" >
+			numero={{$qtdParceiros}} icone="fas fa-handshake" titulo="Total de Parceiros" >
 		</caixa>
+		
+		<caixa 
+			numero={{$qtdProdutos}} icone="fas fa-leaf" titulo="Total de Produtos" >
+		</caixa>
+				
+		<caixa 
+			numero={{$qtdClientes}} icone="fas fa-hand-holding-heart" titulo="Total de Clientes" >
+		</caixa>
+		
 
-		<caixa 
-			numero=10 icone="fas fa-gas-pump" titulo="QTD de Abastecimentos" 
-			{{-- cor_percent="red" --}} percent="10" descricao=" da semana passada">
-		</caixa>
 		
-		<caixa 
-			numero=10 icone="fas fa-dollar-sign" titulo="Gasto na Semana" 
-			{{-- cor_percent="green" --}} percent="10" descricao="da semana passada">
-		</caixa>
-		
-		<caixa 
-			numero=10 icone="fas fa-dollar-sign" titulo="Gasto no Mês" 
-			{{-- cor_percent="green" --}} percent="10" descricao="do mês passado">
-		</caixa>
 	</div>
 
 

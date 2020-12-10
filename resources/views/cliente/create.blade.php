@@ -25,7 +25,7 @@
 						<label class="control-label col-md-1 col-sm-1 col-xs-12" for="nome">Nome</label>
 						<div class="col-md-6 col-sm-6 col-xs-12">
 							<input type="text" id="nome" class="form-control" name="nome" 
-							value="{{isset($produto) ? $produto->nome : old('nome')}}" autofocus>
+							
 							value="{{isset($cliente) ? $cliente->nome : old('nome')}}" autofocus>
 						</div>
 
@@ -141,6 +141,7 @@
 						<label class="control-label col-md-1 col-sm-1 col-xs-12" for="banco"> Banco </label>
 						<div class="col-md-5 col-sm-5 col-xs-12">
 							<select name="banco" id="banco" class="form-control col-md-1" >
+								<option value=""> Selecione... </option>
 								@if (isset($cliente)) <!-- variavel para verificar se foi chamado pela edição -->
 									@foreach($bancos as $banco)
 										@if ( $cliente->banco == $banco)
@@ -177,7 +178,7 @@
 					<div class="item form-group">
 						<label class="control-label col-md-1 col-sm-1 col-xs-12" for="obs"> Observações </label>
 						<div class="col-md-12 col-sm-12 col-xs-12">
-							<textarea rows="4" cols="200" id="obs" name="obs" type="text" class="form-control input-md">{{$cliente->obs or old('obs')}}</textarea>
+							<textarea rows="4" cols="200" id="obs" name="obs" type="text" class="form-control input-md">{{isset($cliente) ? $cliente->obs : old('obs')}}</textarea>
 						</div>
 					</div>
 
